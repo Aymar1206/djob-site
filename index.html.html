@@ -1,0 +1,3240 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DJOB - Marketplace de Services en Côte d'Ivoire</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #8B5CF6;
+            --primary-dark: #7C3AED;
+            --secondary: #EC4899;
+            --accent: #10B981;
+            --dark: #0F0F0F;
+            --dark-secondary: #1A1A1A;
+            --light-bg: #F8F9FC;
+            --white: #FFFFFF;
+            --gray: #6B7280;
+            --gray-light: #E5E7EB;
+            --gray-dark: #374151;
+            --gradient-primary: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%);
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* ========== MARKETING PAGE ========== */
+        .marketing-page {
+            background: var(--dark);
+            color: var(--white);
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 15, 15, 0.9);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.1);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            filter: drop-shadow(0 0 10px rgba(139, 92, 246, 0.5));
+        }
+
+        .logo-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--white);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .btn {
+            padding: 0.9rem 2.2rem;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .hero {
+            margin-top: 80px;
+            min-height: 95vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 100%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+            animation: float 20s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-50px, 50px); }
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 5rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .gradient-text {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-text p {
+            font-size: 1.4rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 3rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-visual {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .service-card {
+            background: rgba(26, 26, 26, 0.8);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            transition: all 0.4s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+        }
+
+        .service-card .icon {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .service-card p {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .trust-bar {
+            background: rgba(26, 26, 26, 0.6);
+            border-top: 1px solid rgba(139, 92, 246, 0.1);
+            padding: 2rem;
+        }
+
+        .trust-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            text-align: center;
+        }
+
+        .trust-item h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .trust-item p {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 7rem 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .section-header .underline {
+            width: 120px;
+            height: 5px;
+            background: var(--gradient-primary);
+            margin: 0 auto 2rem;
+        }
+
+        .section-header p {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.6);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .feature-item {
+            background: var(--dark-secondary);
+            padding: 3rem;
+            border-radius: 24px;
+            border: 1px solid rgba(139, 92, 246, 0.1);
+            transition: all 0.4s;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+        }
+
+        .feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-item h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-item p {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+        }
+
+        .step {
+            text-align: center;
+            padding: 2rem;
+            background: var(--dark-secondary);
+            border-radius: 20px;
+            border: 1px solid rgba(139, 92, 246, 0.1);
+        }
+
+        .step-number {
+            width: 90px;
+            height: 90px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+        }
+
+        .step h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .step p {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .download-section {
+            background: var(--dark-secondary);
+            padding: 7rem 2rem;
+            border-top: 1px solid rgba(139, 92, 246, 0.2);
+        }
+
+        .download-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .download-content h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .download-content p {
+            font-size: 1.4rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 3rem;
+        }
+
+        .app-badges {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .app-badge {
+            background: rgba(139, 92, 246, 0.1);
+            padding: 1.5rem 3rem;
+            border-radius: 16px;
+            border: 2px solid rgba(139, 92, 246, 0.3);
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+
+        .app-badge:hover {
+            background: rgba(139, 92, 246, 0.2);
+            transform: translateY(-5px);
+        }
+
+        footer {
+            background: var(--dark-secondary);
+            color: white;
+            padding: 5rem 2rem 2rem;
+            border-top: 1px solid rgba(139, 92, 246, 0.2);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(139, 92, 246, 0.1);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* ========== MODAL ========== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            overflow-y: auto;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 95vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+            background: var(--light-bg);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--gray-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-content .subtitle {
+            color: var(--gray);
+            margin-bottom: 2rem;
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 0.5rem;
+            background: var(--light-bg);
+            padding: 0.4rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 0.8rem;
+            background: transparent;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: var(--gray);
+        }
+
+        .tab-btn.active {
+            background: white;
+            color: var(--primary);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.6rem;
+            font-weight: 500;
+            color: var(--gray-dark);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1.5px solid var(--gray-light);
+            border-radius: 10px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--gray-dark);
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+        }
+
+        .selfie-capture {
+            border: 2px dashed var(--gray-light);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .selfie-capture:hover {
+            border-color: var(--primary);
+        }
+
+        .selfie-preview {
+            width: 100%;
+            max-width: 200px;
+            border-radius: 10px;
+            margin: 1rem auto;
+            display: none;
+        }
+
+        .selfie-preview.active {
+            display: block;
+        }
+
+        .btn-violet {
+            background: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+        }
+
+        .btn-violet:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .alert-error {
+            background: #FEE2E2;
+            color: #991B1B;
+        }
+
+        .alert-success {
+            background: #D1FAE5;
+            color: #065F46;
+        }
+
+        .alert-warning {
+            background: #FEF3C7;
+            color: #92400E;
+        }
+
+        /* ========== APP CONTAINER ========== */
+        .app-container {
+            display: none;
+            min-height: 100vh;
+            background: var(--light-bg);
+            padding-top: 80px;
+        }
+
+        .app-container.active {
+            display: block;
+        }
+
+        .app-header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: white;
+            border-bottom: 1px solid var(--gray-light);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .notification-bell {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.5rem;
+            padding: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .notification-bell:hover {
+            transform: scale(1.1);
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: #EF4444;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        .notification-panel {
+            position: absolute;
+            top: 60px;
+            right: 2rem;
+            width: 350px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            max-height: 500px;
+            overflow-y: auto;
+            z-index: 2000;
+            display: none;
+        }
+
+        .notification-panel.active {
+            display: block;
+        }
+
+        .notification-item {
+            padding: 1rem;
+            border-bottom: 1px solid var(--gray-light);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .notification-item:hover {
+            background: var(--light-bg);
+        }
+
+        .notification-item.unread {
+            background: rgba(139, 92, 246, 0.05);
+            border-left: 3px solid var(--primary);
+        }
+
+        .notification-title {
+            font-weight: 600;
+            color: var(--gray-dark);
+            margin-bottom: 0.3rem;
+        }
+
+        .notification-text {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .notification-time {
+            font-size: 0.75rem;
+            color: var(--gray);
+            margin-top: 0.3rem;
+        }
+
+        .app-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .role-selection {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .role-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .role-card {
+            padding: 2rem;
+            border: 2px solid var(--gray-light);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .role-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .role-card.active {
+            border-color: var(--primary);
+            background: rgba(139, 92, 246, 0.05);
+        }
+
+        .role-card .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card-light {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid var(--gray-light);
+        }
+
+        .stat-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--gray);
+        }
+
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .card h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--gray-dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-list-item {
+            padding: 1.5rem;
+            border: 1px solid var(--gray-light);
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .status-pending {
+            background: #FEF3C7;
+            color: #92400E;
+        }
+
+        .status-verified {
+            background: #D1FAE5;
+            color: #065F46;
+        }
+
+        .status-unverified {
+            background: #FEE2E2;
+            color: #991B1B;
+        }
+
+        /* ========== ADMIN PANEL ========== */
+        .admin-panel {
+            display: none;
+            min-height: 100vh;
+            background: var(--light-bg);
+        }
+
+        .admin-panel.active {
+            display: block;
+        }
+
+        .admin-sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 260px;
+            height: 100vh;
+            background: white;
+            border-right: 1px solid var(--gray-light);
+            padding: 2rem 0;
+            overflow-y: auto;
+        }
+
+        .admin-logo {
+            padding: 0 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .admin-logo h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .admin-menu {
+            list-style: none;
+        }
+
+        .admin-menu li {
+            padding: 1rem 2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--gray-dark);
+        }
+
+        .admin-menu li:hover,
+        .admin-menu li.active {
+            background: rgba(139, 92, 246, 0.1);
+            color: var(--primary);
+            border-left: 3px solid var(--primary);
+        }
+
+        .admin-content {
+            margin-left: 260px;
+            padding: 2rem;
+        }
+
+        .admin-header {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .admin-stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            border-left: 4px solid;
+        }
+
+        .table-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: var(--light-bg);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .action-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .action-btn.approve {
+            background: #D1FAE5;
+            color: #065F46;
+        }
+
+        .action-btn.reject {
+            background: #FEE2E2;
+            color: #991B1B;
+        }
+
+        .action-btn.view {
+            background: #DBEAFE;
+            color: #1E40AF;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Task Cards */
+        .task-card {
+            background: white;
+            border: 2px solid var(--gray-light);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .task-card:hover {
+            border-color: #5B4EFF;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(91, 78, 255, 0.2);
+        }
+
+        .task-card .task-description {
+            color: #5B4EFF;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .task-card .task-detail {
+            color: var(--gray-dark);
+            margin: 0.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        .task-card .task-budget {
+            color: #5B4EFF;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            text-align: right;
+        }
+
+        .task-card .task-status {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        .task-status.waiting {
+            background: #FEF3C7;
+            color: #92400E;
+        }
+
+        .task-status.accepted {
+            background: #D1FAE5;
+            color: #065F46;
+        }
+
+        .task-status.in-progress {
+            background: #DBEAFE;
+            color: #1E40AF;
+        }
+
+        .task-status.completed {
+            background: #D1FAE5;
+            color: #065F46;
+        }
+
+        /* Chat Messages */
+        .chat-message {
+            margin-bottom: 1rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-message.sent {
+            align-items: flex-end;
+        }
+
+        .chat-message.received {
+            align-items: flex-start;
+        }
+
+        .message-bubble {
+            max-width: 70%;
+            padding: 0.8rem 1.2rem;
+            border-radius: 18px;
+            word-wrap: break-word;
+        }
+
+        .message-bubble.sent {
+            background: #5B4EFF;
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message-bubble.received {
+            background: white;
+            color: var(--gray-dark);
+            border: 1px solid var(--gray-light);
+            border-bottom-left-radius: 4px;
+        }
+
+        .message-time {
+            font-size: 0.75rem;
+            color: var(--gray);
+            margin-top: 0.3rem;
+        }
+
+        /* Rating System */
+        .rating-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            max-width: 500px;
+            margin: 2rem auto;
+        }
+
+        .rating-stars {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .star {
+            font-size: 3rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: var(--gray-light);
+        }
+
+        .star:hover,
+        .star.active {
+            color: #FFC107;
+            transform: scale(1.2);
+        }
+
+        .complete-task-btn {
+            background: #10B981;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1rem;
+            width: 100%;
+            margin-top: 1rem;
+            transition: all 0.3s;
+        }
+
+        .complete-task-btn:hover {
+            background: #059669;
+            transform: translateY(-2px);
+        }
+
+        .task-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .task-actions button {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .nav-links { display: none; }
+            .hero-content { grid-template-columns: 1fr; }
+            .hero-text h1 { font-size: 2.8rem; }
+            .trust-content { grid-template-columns: repeat(2, 1fr); }
+            .role-cards { grid-template-columns: 1fr; }
+            .admin-sidebar { width: 200px; }
+            .admin-content { margin-left: 200px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- MARKETING PAGE -->
+    <div class="marketing-page" id="marketingPage">
+        <header>
+            <nav>
+                <div class="logo-container">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%238B5CF6' /%3E%3Cstop offset='100%25' style='stop-color:%23EC4899' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='30' y='50' width='140' height='100' rx='20' fill='url(%23grad)'/%3E%3Cpath d='M 70 90 L 90 110 L 130 70' stroke='white' stroke-width='8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E" class="logo-img">
+                    <span class="logo-text">DJOB</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#accueil">Accueil</a></li>
+                    <li><a href="#fonctionnement">Fonctionnement</a></li>
+                    <li><a href="#avantages">Avantages</a></li>
+                    <li><a href="#telecharger">Télécharger</a></li>
+                </ul>
+                <button class="btn btn-primary" onclick="openAuthModal()">Commencer</button>
+            </nav>
+        </header>
+
+        <!-- HERO -->
+        <div class="hero" id="accueil">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Trouvez le <span class="gradient-text">service parfait</span> en quelques clics</h1>
+                    <p>DJOB connecte ceux qui ont besoin d'aide avec ceux qui peuvent aider. Demandez un service ou devenez prestataire, c'est simple, rapide et sécurisé.</p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary" onclick="openAuthModal()">Publier une demande</button>
+                        <button class="btn btn-secondary" onclick="openAuthModal()">Devenir prestataire</button>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="service-card">
+                        <span class="icon">🛒</span>
+                        <h3>Courses</h3>
+                        <p>Gagnez du temps sur vos courses</p>
+                    </div>
+                    <div class="service-card">
+                        <span class="icon">🚗</span>
+                        <h3>Livraison</h3>
+                        <p>Rapide et sécurisé</p>
+                    </div>
+                    <div class="service-card">
+                        <span class="icon">👥</span>
+                        <h3>Accompagnement</h3>
+                        <p>Ne soyez plus seul</p>
+                    </div>
+                    <div class="service-card">
+                        <span class="icon">✨</span>
+                        <h3>Services divers</h3>
+                        <p>Et bien plus encore</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="trust-bar">
+            <div class="trust-content">
+                <div class="trust-item">
+                    <h3>500+</h3>
+                    <p>Utilisateurs actifs</p>
+                </div>
+                <div class="trust-item">
+                    <h3>1,200+</h3>
+                    <p>Services complétés</p>
+                </div>
+                <div class="trust-item">
+                    <h3>4.8★</h3>
+                    <p>Note moyenne</p>
+                </div>
+                <div class="trust-item">
+                    <h3>98%</h3>
+                    <p>Satisfaction</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FONCTIONNEMENT -->
+        <section id="fonctionnement" style="background: var(--dark-secondary); margin: 0; max-width: 100%; padding: 7rem 2rem; border-top: 1px solid rgba(139, 92, 246, 0.2);">
+            <div style="max-width: 1400px; margin: 0 auto;">
+                <div class="section-header">
+                    <h2>Comment ça <span class="gradient-text">fonctionne</span> ?</h2>
+                    <div class="underline"></div>
+                    <p>En quelques étapes simples</p>
+                </div>
+                <div class="steps-container">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3>Inscription</h3>
+                        <p>Créez votre compte avec selfie et CNI pour la vérification</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3>Choisissez votre rôle</h3>
+                        <p>Client, Prestataire ou les deux selon vos besoins</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3>Vérification admin</h3>
+                        <p>Votre compte est vérifié sous 24-48h</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <h3>Profitez !</h3>
+                        <p>Publiez des demandes ou acceptez des missions</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AVANTAGES -->
+        <section id="avantages">
+            <div class="section-header">
+                <h2>Les <span class="gradient-text">avantages</span> de DJOB</h2>
+                <div class="underline"></div>
+                <p>Une plateforme moderne, sécurisée et efficace</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <span class="feature-icon">⚡</span>
+                    <h3>Ultra rapide</h3>
+                    <p>Notifications instantanées. Les prestataires proches reçoivent votre demande en temps réel.</p>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🔒</span>
+                    <h3>100% sécurisé</h3>
+                    <p>Vérification d'identité obligatoire avec selfie et CNI. Paiements sécurisés via Orange Money, MTN MoMo et Wave.</p>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">💰</span>
+                    <h3>Prix justes</h3>
+                    <p>Négociez directement. Commission transparente de 15%. Aucun frais caché.</p>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">⭐</span>
+                    <h3>Notation & avis</h3>
+                    <p>Système de notation bidirectionnel pour la qualité et la confiance.</p>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">👥</span>
+                    <h3>Double rôle</h3>
+                    <p>Soyez client ET prestataire. Demandez des services et offrez vos compétences.</p>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📱</span>
+                    <h3>Multi-plateforme</h3>
+                    <p>Site web + Application mobile iOS et Android. Accédez partout, n'importe quand.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TÉLÉCHARGER -->
+        <div class="download-section" id="telecharger">
+            <div class="download-content">
+                <h2>Téléchargez <span class="gradient-text">l'application DJOB</span></h2>
+                <p>Accédez à tous nos services depuis votre smartphone</p>
+                <div class="app-badges">
+                    <div class="app-badge">
+                        <span style="font-size: 2.5rem;">📱</span>
+                        <div style="text-align: left;">
+                            <div style="font-size: 0.85rem; opacity: 0.8;">Disponible sur</div>
+                            <div style="font-size: 1.2rem; font-weight: 700;">Google Play</div>
+                        </div>
+                    </div>
+                    <div class="app-badge">
+                        <span style="font-size: 2.5rem;">🍎</span>
+                        <div style="text-align: left;">
+                            <div style="font-size: 0.85rem; opacity: 0.8;">Télécharger sur</div>
+                            <div style="font-size: 1.2rem; font-weight: 700;">App Store</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>DJOB</h3>
+                    <p style="color: rgba(255,255,255,0.6);">La marketplace de services #1 en Côte d'Ivoire</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Liens</h3>
+                    <p style="color: rgba(255,255,255,0.6); line-height: 2;">
+                        À propos<br>
+                        Comment ça marche<br>
+                        FAQ<br>
+                        Contact
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3>Paiements</h3>
+                    <p style="color: rgba(255,255,255,0.6); line-height: 2;">
+                        💳 Orange Money<br>
+                        💰 MTN MoMo<br>
+                        🌊 Wave<br>
+                        💻 CinetPay
+                    </p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 DJOB. Tous droits réservés.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- AUTH MODAL -->
+    <div class="modal" id="authModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeAuthModal()">×</span>
+            
+            <h2 id="modalTitle">Bienvenue sur DJOB</h2>
+            <p class="subtitle">Connectez-vous ou créez un compte</p>
+
+            <div id="authAlerts"></div>
+
+            <div class="tab-buttons">
+                <button class="tab-btn active" onclick="showAuthTab('login')">Connexion</button>
+                <button class="tab-btn" onclick="showAuthTab('register')">Inscription</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label>Mot de passe</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="btn-violet">Se connecter</button>
+            </form>
+
+            <!-- Register Form -->
+            <form id="registerForm" class="hidden" onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label>Nom d'utilisateur</label>
+                    <input type="text" id="regUsername" placeholder="Ex: Tyty" required>
+                </div>
+                <div class="form-group">
+                    <label>Nom complet</label>
+                    <input type="text" id="regFullName" placeholder="Ex: FLODO Becanty Guy Aymar" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="regEmail" required>
+                </div>
+                <div class="form-group">
+                    <label>Téléphone</label>
+                    <input type="tel" id="regPhone" placeholder="+225 07 XX XX XX XX" required>
+                </div>
+                <div class="form-group">
+                    <label>Mot de passe</label>
+                    <input type="password" id="regPassword" minlength="8" required>
+                </div>
+                <div class="form-group">
+                    <label>Confirmer le mot de passe</label>
+                    <input type="password" id="regPasswordConfirm" required>
+                </div>
+                <button type="submit" class="btn-violet">Créer mon compte</button>
+                <button type="button" class="btn-violet" style="background: var(--accent); margin-top: 0.5rem;" onclick="fillTestData()">🧪 Remplir avec données de test</button>
+                <p style="font-size: 0.85rem; color: var(--gray); margin-top: 1rem; text-align: center;">
+                    Vous pourrez compléter votre profil après l'inscription
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- APP CONTAINER -->
+    <div class="app-container" id="appContainer">
+        <div class="app-header">
+            <div class="logo-container">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%238B5CF6' /%3E%3Cstop offset='100%25' style='stop-color:%23EC4899' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='30' y='50' width='140' height='100' rx='20' fill='url(%23grad)'/%3E%3Cpath d='M 70 90 L 90 110 L 130 70' stroke='white' stroke-width='8' fill='none'/%3E%3C/svg%3E" style="width: 35px; height: 35px;">
+                <span class="logo-text" style="font-size: 1.3rem;">DJOB</span>
+            </div>
+            <div style="display: flex; gap: 1.5rem; align-items: center;">
+                <div class="notification-bell" onclick="toggleNotifications()">
+                    🔔
+                    <span id="notificationBadge" class="notification-badge hidden">0</span>
+                </div>
+                <span id="appUserName" style="color: var(--gray);">Utilisateur</span>
+                <button style="padding: 0.6rem 1.5rem; background: transparent; color: var(--primary); border: 2px solid var(--primary); border-radius: 8px; cursor: pointer; font-weight: 600;" onclick="handleLogout()">Déconnexion</button>
+            </div>
+            
+            <!-- Notification Panel -->
+            <div id="notificationPanel" class="notification-panel">
+                <div style="padding: 1rem; border-bottom: 1px solid var(--gray-light); display: flex; justify-content: space-between; align-items: center;">
+                    <h3 style="margin: 0;">Notifications</h3>
+                    <button onclick="markAllAsRead()" style="background: none; border: none; color: var(--primary); cursor: pointer; font-size: 0.9rem;">Tout marquer lu</button>
+                </div>
+                <div id="notificationsList">
+                    <p style="text-align: center; padding: 2rem; color: var(--gray);">Aucune notification</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="app-content">
+            <!-- Role Selection -->
+            <div id="roleSelection" class="hidden">
+                <div class="role-selection">
+                    <h2 style="font-size: 2rem; margin-bottom: 3rem;">Alors, on fait quoi aujourd'hui ?</h2>
+                    <div class="role-cards">
+                        <div class="role-card" onclick="selectDailyRole('demandeur')">
+                            <div class="icon">🛎️</div>
+                            <h3>JE VEUX UN SERVICE</h3>
+                            <p>Publier une demande</p>
+                        </div>
+                        <div class="role-card" onclick="selectDailyRole('prestataire')">
+                            <div class="icon">💼</div>
+                            <h3>JE VEUX TRAVAILLER</h3>
+                            <p>Voir les tâches disponibles</p>
+                        </div>
+                    </div>
+                    <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--gray-light);">
+                        <button class="btn-violet" style="background: transparent; color: var(--primary); border: 2px solid var(--primary);" onclick="showProfileSection()">
+                            👤 Mon profil
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Verification Pending -->
+            <div id="verificationPending" class="card hidden">
+                <h2>⏳ Vérification en cours</h2>
+                <div class="alert alert-warning">
+                    Votre compte est en attente de vérification. Un administrateur va examiner votre selfie et votre pièce d'identité sous 24-48h. Vous recevrez une notification par email une fois approuvé.
+                </div>
+            </div>
+
+            <!-- Dashboard -->
+            <div id="appDashboard" class="hidden">
+                <!-- DEMANDEUR INTERFACE -->
+                <div id="demandeurInterface" class="hidden">
+                    <!-- Create Service Request -->
+                    <div id="createServiceForm" class="card">
+                        <button onclick="backToRoleSelection()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; margin-bottom: 1rem;">←</button>
+                        
+                        <div id="serviceFormAlerts"></div>
+
+                        <form onsubmit="publishService(event)">
+                            <div class="form-group">
+                                <label style="font-size: 0.9rem;">Description de la tâche</label>
+                                <textarea id="serviceDescription" rows="3" required placeholder="Ex: Acheter des médicaments"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label style="font-weight: 700;">Où commence la tâche ?</label>
+                                <input type="text" id="serviceStart" placeholder="Ex: Chez moi" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label style="font-weight: 700;">Adresse de livraison !</label>
+                                <input type="text" id="serviceAddress" placeholder="Donner toutes les précisions svp !!!" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label style="font-weight: 700;">Budget</label>
+                                <input type="number" id="serviceBudget" placeholder="Ex: 2500 F" required min="500">
+                            </div>
+
+                            <button type="submit" class="btn-violet" style="background: #5B4EFF;">PUBLIER</button>
+                            <button type="button" class="btn-violet" style="background: #5B4EFF; margin-top: 0.5rem;" onclick="showMyRequests()">→ SUIVANT</button>
+                        </form>
+                    </div>
+
+                    <!-- My Requests List -->
+                    <div id="myRequestsList" class="card hidden">
+                        <button onclick="backToServiceForm()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; margin-bottom: 1rem;">←</button>
+                        <h2>Mes demandes</h2>
+                        <div id="requestsContainer"></div>
+                    </div>
+                </div>
+
+                <!-- PRESTATAIRE INTERFACE -->
+                <div id="prestataireInterface" class="hidden">
+                    <!-- Available Tasks List -->
+                    <div id="tasksList" class="card">
+                        <button onclick="backToRoleSelection()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; margin-bottom: 1rem;">←</button>
+                        <h2 style="text-align: center; font-size: 1.8rem; font-weight: 700;">Liste des tâches</h2>
+                        <div id="tasksContainer" style="margin-top: 2rem;"></div>
+                    </div>
+                </div>
+
+                <!-- CHAT INTERFACE -->
+                <div id="chatInterface" class="card hidden">
+                    <button onclick="closeChat()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; margin-bottom: 1rem;">←</button>
+                    
+                    <!-- Chat Header -->
+                    <div style="text-align: center; padding: 1rem; border-bottom: 1px solid var(--gray-light);">
+                        <div style="width: 60px; height: 60px; border-radius: 50%; background: var(--gradient-primary); margin: 0 auto 0.5rem; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">
+                            <span id="chatUserInitial">F</span>
+                        </div>
+                        <h3 id="chatUserName">FLODO Becanty Guy Aymar</h3>
+                        <p style="color: var(--gray); font-size: 0.9rem;" id="chatTaskDesc">vendre</p>
+                        <p style="color: var(--primary); font-weight: 600; font-size: 1.1rem; margin-top: 0.5rem;">
+                            Budget: <span id="chatBudget">2 000</span> FCFA
+                        </p>
+                    </div>
+
+                    <!-- Messages -->
+                    <div id="chatMessages" style="height: 400px; overflow-y: auto; padding: 1rem; background: var(--light-bg); border-radius: 10px; margin: 1rem 0;">
+                        <!-- Messages will appear here -->
+                    </div>
+
+                    <!-- Price Negotiation -->
+                    <div id="priceNegotiation" class="hidden" style="background: #FEF3C7; padding: 1rem; border-radius: 10px; margin-bottom: 1rem;">
+                        <p style="font-weight: 600; color: #92400E;">💰 Négociation du prix</p>
+                        <div style="display: flex; gap: 1rem; margin-top: 0.5rem;">
+                            <input type="number" id="newPrice" placeholder="Nouveau prix" style="flex: 1; padding: 0.7rem; border: 1px solid var(--gray-light); border-radius: 8px;">
+                            <button onclick="proposePrice()" class="btn-violet" style="padding: 0.7rem 1.5rem;">Proposer</button>
+                        </div>
+                    </div>
+
+                    <!-- Price Confirmation -->
+                    <div id="priceConfirmation" class="hidden" style="background: #D1FAE5; padding: 1rem; border-radius: 10px; margin-bottom: 1rem;">
+                        <p style="font-weight: 600; color: #065F46;">✅ Prix proposé: <span id="proposedPrice">0</span> FCFA</p>
+                        <div style="display: flex; gap: 1rem; margin-top: 0.5rem;">
+                            <button onclick="acceptPrice()" class="btn-violet" style="flex: 1; background: #10B981;">Accepter</button>
+                            <button onclick="rejectPrice()" class="btn-violet" style="flex: 1; background: #EF4444;">Refuser</button>
+                        </div>
+                    </div>
+
+                    <!-- Complete Task Section -->
+                    <div id="completeTaskSection" class="hidden" style="background: #DBEAFE; padding: 1rem; border-radius: 10px; margin-bottom: 1rem;">
+                        <p style="font-weight: 600; color: #1E40AF;">🎯 Tâche en cours</p>
+                        <button onclick="markTaskComplete()" class="complete-task-btn">
+                            ✅ Marquer comme terminé
+                        </button>
+                    </div>
+
+                    <!-- Rating Section -->
+                    <div id="ratingSection" class="hidden">
+                        <div class="rating-container">
+                            <h3>⭐ Évaluez votre expérience</h3>
+                            <p style="color: var(--gray); margin-bottom: 1rem;">Comment s'est passée cette tâche ?</p>
+                            <div class="rating-stars">
+                                <span class="star" onclick="setRating(1)">★</span>
+                                <span class="star" onclick="setRating(2)">★</span>
+                                <span class="star" onclick="setRating(3)">★</span>
+                                <span class="star" onclick="setRating(4)">★</span>
+                                <span class="star" onclick="setRating(5)">★</span>
+                            </div>
+                            <textarea id="ratingComment" placeholder="Commentaire (optionnel)" style="width: 100%; padding: 1rem; border: 1px solid var(--gray-light); border-radius: 10px; margin-bottom: 1rem;"></textarea>
+                            <button onclick="submitRating()" class="btn-violet">Envoyer l'évaluation</button>
+                        </div>
+                    </div>
+
+                    <!-- Message Input -->
+                    <div style="display: flex; gap: 1rem;">
+                        <input type="text" id="messageInput" placeholder="Votre message..." style="flex: 1; padding: 1rem; border: 1.5px solid var(--gray-light); border-radius: 10px;">
+                        <button onclick="sendMessage()" style="background: #5B4EFF; color: white; border: none; padding: 1rem 1.5rem; border-radius: 10px; cursor: pointer; font-size: 1.2rem;">➤</button>
+                        <button onclick="togglePriceNegotiation()" style="background: var(--light-bg); color: var(--gray-dark); border: 1px solid var(--gray-light); padding: 1rem; border-radius: 10px; cursor: pointer;">💰</button>
+                    </div>
+                </div>
+
+                <!-- Profile Section -->
+                <div id="profileSection" class="hidden">
+                    <div class="card">
+                        <h2>📋 Mon Profil</h2>
+                        <p style="color: var(--gray); margin-bottom: 2rem;">Complétez votre profil pour être vérifié par un administrateur</p>
+                        
+                        <div id="profileAlerts"></div>
+
+                        <!-- Profile completion warning -->
+                        <div id="profileWarning" class="alert alert-warning" style="margin-bottom: 2rem;">
+                            ⚠️ Veuillez compléter votre profil (photo, CNI et adresse) pour une meilleure expérience
+                        </div>
+
+                        <form id="profileForm" onsubmit="handleProfileUpdate(event)">
+                            <div class="form-group">
+                                <label>Nom d'utilisateur</label>
+                                <input type="text" id="profileUsername" readonly style="background: var(--light-bg);">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Nom complet</label>
+                                <input type="text" id="profileFullName" readonly style="background: var(--light-bg);">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" id="profileEmail" readonly style="background: var(--light-bg);">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Téléphone</label>
+                                <input type="tel" id="profilePhone" readonly style="background: var(--light-bg);">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Photo de profil (Selfie obligatoire) 📷</label>
+                                <div class="selfie-capture" onclick="document.getElementById('profilePhotoInput').click()">
+                                    <input type="file" id="profilePhotoInput" accept="image/*" capture="user" style="display: none;" onchange="handleProfilePhoto(this)">
+                                    <img id="profilePhotoPreview" class="selfie-preview">
+                                    <p id="profilePhotoText">📷 Prendre un selfie</p>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Pièce d'identité (CNI/Passeport) 📄</label>
+                                <div class="selfie-capture" onclick="document.getElementById('profileIdCardInput').click()">
+                                    <input type="file" id="profileIdCardInput" accept="image/*,.pdf" style="display: none;" onchange="handleProfileIdCard(this)">
+                                    <p id="profileIdCardText">📄 Scanner votre CNI</p>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Adresse d'habitation</label>
+                                <input type="text" id="profileAddress" placeholder="Ex: Yopougon, Abidjan">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Biographie (optionnel)</label>
+                                <textarea id="profileBio" placeholder="Parlez de vous..."></textarea>
+                            </div>
+
+                            <button type="submit" class="btn-violet">💾 Sauvegarder le profil</button>
+                            <button type="button" class="btn-violet" style="background: var(--gray); margin-top: 0.5rem;" onclick="showOverviewSection()">← Retour au tableau de bord</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Overview Section -->
+                <div id="overviewSection">
+                    <!-- Alert if profile not completed -->
+                    <div id="completeProfileAlert" class="alert alert-warning" style="margin-bottom: 2rem;">
+                        ⚠️ <strong>Profil incomplet :</strong> Complétez votre profil (photo, CNI et adresse) pour une meilleure expérience.
+                        <button class="btn-violet" style="width: auto; padding: 0.5rem 1.5rem; margin-top: 1rem;" onclick="showProfileSection()">
+                            ➡️ Compléter mon profil
+                        </button>
+                    </div>
+
+                    <div class="dashboard-grid">
+                        <div class="stat-card-light">
+                            <div class="stat-number" id="statDemandes">0</div>
+                            <div class="stat-label">Demandes publiées</div>
+                        </div>
+                        <div class="stat-card-light">
+                            <div class="stat-number" id="statPrestations">0</div>
+                            <div class="stat-label">Prestations effectuées</div>
+                        </div>
+                        <div class="stat-card-light">
+                            <div class="stat-number" id="statRating">5.0</div>
+                            <div class="stat-label">Note moyenne ⭐</div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                            <h2>Mes activités</h2>
+                            <button class="btn-violet" style="width: auto; padding: 0.7rem 1.5rem;" onclick="showProfileSection()">
+                                👤 Mon profil
+                            </button>
+                        </div>
+                        <div id="activitiesList">
+                            <p style="text-align: center; color: var(--gray); padding: 2rem;">Aucune activité</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADMIN PANEL -->
+    <div class="admin-panel" id="adminPanel">
+        <div class="admin-sidebar">
+            <div class="admin-logo">
+                <h2>DJOB Admin</h2>
+                <p style="color: var(--gray); font-size: 0.9rem;" id="adminName">Admin</p>
+            </div>
+            <ul class="admin-menu">
+                <li class="active" onclick="showAdminSection('dashboard')">📊 Tableau de bord</li>
+                <li onclick="showAdminSection('verification')">✅ Vérifications</li>
+                <li onclick="showAdminSection('users')">👥 Utilisateurs</li>
+                <li onclick="showAdminSection('services')">📝 Services</li>
+                <li onclick="showAdminSection('stats')">📊 Statistiques</li>
+                <li onclick="showAdminSection('settings')">⚙️ Paramètres</li>
+                <li onclick="handleLogout()">🚪 Déconnexion</li>
+            </ul>
+        </div>
+
+        <div class="admin-content">
+            <!-- Dashboard -->
+            <div id="adminDashboard" class="admin-section">
+                <div class="admin-header">
+                    <h1>Tableau de bord</h1>
+                </div>
+                <div class="admin-stats">
+                    <div class="admin-stat-card" style="border-left-color: #3B82F6;">
+                        <div class="stat-number" id="adminStatUsers">0</div>
+                        <div class="stat-label">Utilisateurs totaux</div>
+                    </div>
+                    <div class="admin-stat-card" style="border-left-color: #10B981;">
+                        <div class="stat-number" id="adminStatServices">0</div>
+                        <div class="stat-label">Services en cours</div>
+                    </div>
+                    <div class="admin-stat-card" style="border-left-color: #8B5CF6;">
+                        <div class="stat-number" id="adminStatPending">0</div>
+                        <div class="stat-label">En attente</div>
+                    </div>
+                    <div class="admin-stat-card" style="border-left-color: #F59E0B;">
+                        <div class="stat-number" id="adminStatRevenue">0 FCFA</div>
+                        <div class="stat-label">Revenus du jour</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Verification -->
+            <div id="adminVerification" class="admin-section hidden">
+                <div class="admin-header">
+                    <h1>Vérification des comptes</h1>
+                    <div class="alert alert-warning" style="margin-top: 1rem;">
+                        🧪 <strong>MODE TEST:</strong> La vérification est actuellement désactivée. Tous les nouveaux comptes ont un accès immédiat.
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Utilisateur</th>
+                                <th>Email</th>
+                                <th>Téléphone</th>
+                                <th>Date</th>
+                                <th>Statut</th>
+                            </tr>
+                        </thead>
+                        <tbody id="verificationTable">
+                            <tr><td colspan="5" style="text-align: center;">Mode test activé - Vérification automatique</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Users -->
+            <div id="adminUsers" class="admin-section hidden">
+                <div class="admin-header">
+                    <h1>Utilisateurs</h1>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>Rôles</th>
+                                <th>Email</th>
+                                <th>Statut</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTable">
+                            <tr><td colspan="5" style="text-align: center;">Aucun utilisateur</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Services -->
+            <div id="adminServices" class="admin-section hidden">
+                <div class="admin-header">
+                    <h1>Services & Tâches</h1>
+                    <p style="color: var(--gray); margin-top: 0.5rem;">Monitoring en temps réel de toutes les transactions</p>
+                </div>
+                
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Demandeur</th>
+                                <th>Prestataire</th>
+                                <th>Description</th>
+                                <th>Budget Initial</th>
+                                <th>Prix Négocié</th>
+                                <th>Commission (15%)</th>
+                                <th>Statut</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="servicesTable">
+                            <tr><td colspan="10" style="text-align: center;">Aucun service</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Service Detail Modal -->
+                <div id="serviceDetailModal" class="modal">
+                    <div class="modal-content" style="max-width: 800px;">
+                        <span class="close-modal" onclick="closeServiceDetail()">×</span>
+                        <h2>Détails de la tâche</h2>
+                        <div id="serviceDetailContent"></div>
+                        
+                        <h3 style="margin-top: 2rem; border-top: 1px solid var(--gray-light); padding-top: 1rem;">💬 Historique des messages</h3>
+                        <div id="adminChatHistory" style="max-height: 400px; overflow-y: auto; background: var(--light-bg); padding: 1rem; border-radius: 10px;">
+                            <p style="text-align: center; color: var(--gray);">Aucun message</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistics -->
+            <div id="adminStats" class="admin-section hidden">
+                <div class="admin-header">
+                    <h1>Statistiques détaillées</h1>
+                </div>
+                
+                <h3 style="margin: 2rem 0 1rem;">Liste complète des utilisateurs inscrits</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nom complet</th>
+                                <th>Username</th>
+                                <th>Rôles</th>
+                                <th>Demandes publiées</th>
+                                <th>Prestations effectuées</th>
+                                <th>Total activités</th>
+                            </tr>
+                        </thead>
+                        <tbody id="statsUsersTable">
+                            <tr><td colspan="6" style="text-align: center;">Aucun utilisateur</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 style="margin: 3rem 0 1rem;">Rapports périodiques</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                    <div class="card">
+                        <h3>📅 Aujourd'hui</h3>
+                        <div class="stat-number" id="reportToday">0</div>
+                        <div class="stat-label">Services complétés</div>
+                    </div>
+                    <div class="card">
+                        <h3>📅 Cette semaine</h3>
+                        <div class="stat-number" id="reportWeek">0</div>
+                        <div class="stat-label">Services complétés</div>
+                    </div>
+                    <div class="card">
+                        <h3>📅 Ce mois</h3>
+                        <div class="stat-number" id="reportMonth">0</div>
+                        <div class="stat-label">Services complétés</div>
+                    </div>
+                    <div class="card">
+                        <h3>📅 Cette année</h3>
+                        <div class="stat-number" id="reportYear">0</div>
+                        <div class="stat-label">Services complétés</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings -->
+            <div id="adminSettings" class="admin-section hidden">
+                <div class="admin-header">
+                    <h1>Paramètres</h1>
+                </div>
+                <div class="card">
+                    <h2>Administrateurs</h2>
+                    <ul style="list-style: none;">
+                        <li style="padding: 1rem; border-bottom: 1px solid var(--gray-light);">
+                            <strong>ANGHU TANOH</strong> - anghutanoh@gmail.com
+                        </li>
+                        <li style="padding: 1rem; border-bottom: 1px solid var(--gray-light);">
+                            <strong>BENNY SALOMON</strong> - bennysalomon16@gmail.com
+                        </li>
+                        <li style="padding: 1rem;">
+                            <strong>FLODO BECANTY GUY AYMAR</strong> - aymar12flodo@gmail.com
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const ADMIN_EMAILS = ['anghutanoh@gmail.com', 'bennysalomon16@gmail.com', 'aymar12flodo@gmail.com'];
+        let currentUser = null;
+        let selectedRoles = [];
+        let users = JSON.parse(localStorage.getItem('djob_users') || '[]');
+        let services = JSON.parse(localStorage.getItem('djob_services') || '[]');
+        let messages = JSON.parse(localStorage.getItem('djob_messages') || '[]');
+        let notifications = JSON.parse(localStorage.getItem('djob_notifications') || '[]');
+        let currentChat = null;
+        let selectedRating = 0;
+
+        // NOTIFICATION SYSTEM
+        function createNotification(userId, type, title, text, serviceId = null) {
+            const notification = {
+                id: Date.now(),
+                userId: userId,
+                type: type, // 'task_accepted', 'new_message', 'price_proposal', 'task_completed', 'rating_received'
+                title: title,
+                text: text,
+                serviceId: serviceId,
+                read: false,
+                timestamp: new Date().toISOString()
+            };
+
+            notifications.push(notification);
+            localStorage.setItem('djob_notifications', JSON.stringify(notifications));
+            
+            console.log('🔔 Notification créée:', notification);
+            
+            // Update badge if current user
+            if (currentUser && currentUser.id === userId) {
+                updateNotificationBadge();
+            }
+        }
+
+        function updateNotificationBadge() {
+            if (!currentUser) return;
+            
+            const unreadCount = notifications.filter(n => n.userId === currentUser.id && !n.read).length;
+            const badge = document.getElementById('notificationBadge');
+            
+            if (unreadCount > 0) {
+                badge.textContent = unreadCount;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+        }
+
+        function toggleNotifications() {
+            const panel = document.getElementById('notificationPanel');
+            panel.classList.toggle('active');
+            
+            if (panel.classList.contains('active')) {
+                loadNotifications();
+            }
+        }
+
+        function loadNotifications() {
+            if (!currentUser) return;
+            
+            const userNotifications = notifications
+                .filter(n => n.userId === currentUser.id)
+                .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+            
+            const container = document.getElementById('notificationsList');
+            
+            if (userNotifications.length === 0) {
+                container.innerHTML = '<p style="text-align: center; padding: 2rem; color: var(--gray);">Aucune notification</p>';
+                return;
+            }
+
+            container.innerHTML = userNotifications.map(notif => {
+                const time = new Date(notif.timestamp);
+                const timeStr = time.toLocaleString('fr-FR', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+
+                return `
+                    <div class="notification-item ${!notif.read ? 'unread' : ''}" onclick="handleNotificationClick(${notif.id})">
+                        <div class="notification-title">${notif.title}</div>
+                        <div class="notification-text">${notif.text}</div>
+                        <div class="notification-time">${timeStr}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function handleNotificationClick(notifId) {
+            const notif = notifications.find(n => n.id === notifId);
+            if (!notif) return;
+
+            // Mark as read
+            const index = notifications.findIndex(n => n.id === notifId);
+            notifications[index].read = true;
+            localStorage.setItem('djob_notifications', JSON.stringify(notifications));
+            
+            updateNotificationBadge();
+            
+            // Handle action based on type
+            if (notif.serviceId) {
+                const service = services.find(s => s.id === notif.serviceId);
+                if (service) {
+                    if (service.demandeurId === currentUser.id) {
+                        showMyRequests();
+                        showDemandeurInterface();
+                        setTimeout(() => openChatFromDemandeur(service.id), 100);
+                    } else if (service.prestataireId === currentUser.id) {
+                        showPrestataireInterface();
+                        setTimeout(() => openChatFromPrestataire(service.id), 100);
+                    }
+                }
+            }
+            
+            // Close notification panel
+            document.getElementById('notificationPanel').classList.remove('active');
+        }
+
+        function markAllAsRead() {
+            notifications = notifications.map(n => {
+                if (n.userId === currentUser.id) {
+                    n.read = true;
+                }
+                return n;
+            });
+            localStorage.setItem('djob_notifications', JSON.stringify(notifications));
+            updateNotificationBadge();
+            loadNotifications();
+        }
+
+        // RATING & TASK COMPLETION SYSTEM
+        function setRating(stars) {
+            selectedRating = stars;
+            const starElements = document.querySelectorAll('.star');
+            starElements.forEach((star, index) => {
+                if (index < stars) {
+                    star.classList.add('active');
+                } else {
+                    star.classList.remove('active');
+                }
+            });
+        }
+
+        function markTaskComplete() {
+            if (!currentChat) return;
+
+            const serviceIndex = services.findIndex(s => s.id === currentChat.serviceId);
+            if (serviceIndex === -1) return;
+
+            const service = services[serviceIndex];
+
+            // Check if both parties confirmed price
+            if (!service.priceConfirmedByDemandeur || !service.priceConfirmedByPrestataire) {
+                alert('⚠️ Le prix doit être confirmé par les deux parties avant de terminer la tâche');
+                return;
+            }
+
+            if (confirm('✅ Confirmer que la tâche est terminée ?')) {
+                services[serviceIndex].status = 'completed';
+                services[serviceIndex].completedAt = new Date().toISOString();
+                localStorage.setItem('djob_services', JSON.stringify(services));
+
+                // Update user stats
+                updateUserStats(service);
+
+                // Notify other party
+                const otherUserId = currentChat.userRole === 'demandeur' ? service.prestataireId : service.demandeurId;
+                createNotification(
+                    otherUserId,
+                    'task_completed',
+                    '✅ Tâche terminée',
+                    `La tâche "${service.description}" a été marquée comme terminée`,
+                    service.id
+                );
+
+                // Show rating section
+                document.getElementById('completeTaskSection').classList.add('hidden');
+                document.getElementById('ratingSection').classList.remove('hidden');
+                
+                // Add system message
+                const systemMessage = {
+                    id: Date.now(),
+                    serviceId: currentChat.serviceId,
+                    senderId: 0,
+                    senderName: 'Système',
+                    text: `✅ Tâche terminée! Montant final: ${service.finalPrice} FCFA. Commission DJOB (15%): ${Math.round(service.finalPrice * 0.15)} FCFA`,
+                    type: 'system',
+                    timestamp: new Date().toISOString()
+                };
+                messages.push(systemMessage);
+                localStorage.setItem('djob_messages', JSON.stringify(messages));
+
+                loadChatMessages();
+            }
+        }
+
+        function updateUserStats(service) {
+            // Update demandeur stats
+            const demandeurIndex = users.findIndex(u => u.id === service.demandeurId);
+            if (demandeurIndex !== -1) {
+                users[demandeurIndex].demandesCount = (users[demandeurIndex].demandesCount || 0) + 1;
+            }
+
+            // Update prestataire stats
+            const prestataireIndex = users.findIndex(u => u.id === service.prestataireId);
+            if (prestataireIndex !== -1) {
+                users[prestataireIndex].prestationsCount = (users[prestataireIndex].prestationsCount || 0) + 1;
+            }
+
+            localStorage.setItem('djob_users', JSON.stringify(users));
+        }
+
+        function submitRating() {
+            if (selectedRating === 0) {
+                alert('⚠️ Veuillez sélectionner une note');
+                return;
+            }
+
+            if (!currentChat) return;
+
+            const comment = document.getElementById('ratingComment').value;
+            const service = services.find(s => s.id === currentChat.serviceId);
+
+            const rating = {
+                id: Date.now(),
+                serviceId: currentChat.serviceId,
+                fromUserId: currentUser.id,
+                fromUserName: currentUser.fullName,
+                toUserId: currentChat.otherUserId,
+                toUserName: currentChat.otherUserName,
+                stars: selectedRating,
+                comment: comment,
+                timestamp: new Date().toISOString()
+            };
+
+            // Save rating
+            let ratings = JSON.parse(localStorage.getItem('djob_ratings') || '[]');
+            ratings.push(rating);
+            localStorage.setItem('djob_ratings', JSON.stringify(ratings));
+
+            // Update user rating
+            updateUserRating(currentChat.otherUserId);
+
+            // Notify rated user
+            createNotification(
+                currentChat.otherUserId,
+                'rating_received',
+                '⭐ Nouvelle évaluation',
+                `${currentUser.fullName} vous a donné ${selectedRating} étoiles`,
+                currentChat.serviceId
+            );
+
+            alert(`✅ Merci pour votre évaluation! ${selectedRating} ⭐`);
+
+            // Close chat and return
+            document.getElementById('ratingSection').classList.add('hidden');
+            closeChat();
+        }
+
+        function updateUserRating(userId) {
+            const ratings = JSON.parse(localStorage.getItem('djob_ratings') || '[]');
+            const userRatings = ratings.filter(r => r.toUserId === userId);
+
+            if (userRatings.length > 0) {
+                const avgRating = userRatings.reduce((sum, r) => sum + r.stars, 0) / userRatings.length;
+                const userIndex = users.findIndex(u => u.id === userId);
+                if (userIndex !== -1) {
+                    users[userIndex].rating = parseFloat(avgRating.toFixed(1));
+                    localStorage.setItem('djob_users', JSON.stringify(users));
+                }
+            }
+        }
+
+        // Close notification panel when clicking outside
+        document.addEventListener('click', function(event) {
+            const panel = document.getElementById('notificationPanel');
+            const bell = event.target.closest('.notification-bell');
+            
+            if (!bell && !event.target.closest('.notification-panel')) {
+                panel.classList.remove('active');
+            }
+        });
+
+        // ROLE SELECTION (Video Style)
+        function selectDailyRole(role) {
+            console.log('📋 Sélection du rôle:', role);
+            
+            // Save role if not already in user's roles
+            if (!currentUser.roles.includes(role)) {
+                currentUser.roles.push(role);
+                const userIndex = users.findIndex(u => u.id === currentUser.id);
+                if (userIndex !== -1) {
+                    users[userIndex].roles = currentUser.roles;
+                    users[userIndex].rolesSelected = true;
+                    localStorage.setItem('djob_users', JSON.stringify(users));
+                }
+            }
+
+            if (role === 'demandeur') {
+                showDemandeurInterface();
+            } else {
+                showPrestataireInterface();
+            }
+        }
+
+        function backToRoleSelection() {
+            console.log('⬅️ Retour à la sélection');
+            document.getElementById('appDashboard').classList.remove('hidden');
+            document.getElementById('roleSelection').classList.remove('hidden');
+            document.getElementById('demandeurInterface').classList.add('hidden');
+            document.getElementById('prestataireInterface').classList.add('hidden');
+            document.getElementById('chatInterface').classList.add('hidden');
+            document.getElementById('profileSection').classList.add('hidden');
+            document.getElementById('overviewSection').classList.add('hidden');
+        }
+
+        // DEMANDEUR FUNCTIONS
+        function showDemandeurInterface() {
+            console.log('🛎️ Interface DEMANDEUR');
+            document.getElementById('appDashboard').classList.remove('hidden');
+            document.getElementById('roleSelection').classList.add('hidden');
+            document.getElementById('demandeurInterface').classList.remove('hidden');
+            document.getElementById('prestataireInterface').classList.add('hidden');
+            document.getElementById('chatInterface').classList.add('hidden');
+            document.getElementById('profileSection').classList.add('hidden');
+            document.getElementById('overviewSection').classList.add('hidden');
+            document.getElementById('createServiceForm').classList.remove('hidden');
+            document.getElementById('myRequestsList').classList.add('hidden');
+        }
+
+        function publishService(e) {
+            e.preventDefault();
+            
+            const newService = {
+                id: Date.now(),
+                demandeurId: currentUser.id,
+                demandeurName: currentUser.fullName,
+                description: document.getElementById('serviceDescription').value,
+                startLocation: document.getElementById('serviceStart').value,
+                deliveryAddress: document.getElementById('serviceAddress').value,
+                budget: parseInt(document.getElementById('serviceBudget').value),
+                status: 'waiting', // waiting, accepted, in-progress, completed
+                prestataireId: null,
+                prestataireName: null,
+                finalPrice: null,
+                priceConfirmedByDemandeur: false,
+                priceConfirmedByPrestataire: false,
+                createdAt: new Date().toISOString()
+            };
+
+            services.push(newService);
+            localStorage.setItem('djob_services', JSON.stringify(services));
+
+            console.log('✅ Service publié:', newService);
+            showAlert('serviceFormAlerts', 'success', '✅ Votre demande a été publiée!');
+
+            // Reset form
+            document.getElementById('serviceDescription').value = '';
+            document.getElementById('serviceStart').value = '';
+            document.getElementById('serviceAddress').value = '';
+            document.getElementById('serviceBudget').value = '';
+
+            setTimeout(() => {
+                showMyRequests();
+            }, 1500);
+        }
+
+        function showMyRequests() {
+            document.getElementById('createServiceForm').classList.add('hidden');
+            document.getElementById('myRequestsList').classList.remove('hidden');
+            loadMyRequests();
+        }
+
+        function backToServiceForm() {
+            document.getElementById('myRequestsList').classList.add('hidden');
+            document.getElementById('createServiceForm').classList.remove('hidden');
+        }
+
+        function loadMyRequests() {
+            const myServices = services.filter(s => s.demandeurId === currentUser.id);
+            const container = document.getElementById('requestsContainer');
+
+            if (myServices.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: var(--gray); padding: 2rem;">Aucune demande</p>';
+                return;
+            }
+
+            container.innerHTML = myServices.map(service => `
+                <div class="task-card" onclick="openChatFromDemandeur(${service.id})">
+                    <div class="task-description">DESCRIPTION: ${service.description}</div>
+                    <div class="task-detail">LA TACHE COMMENCE: ${service.startLocation}</div>
+                    <div class="task-detail">ADRESSE DE LIVRAISON: ${service.deliveryAddress}</div>
+                    <div class="task-budget">Budget: ${service.budget.toLocaleString()}</div>
+                    <span class="task-status ${service.status}">${getStatusText(service.status)}</span>
+                    ${service.prestataireId ? `<p style="margin-top: 0.5rem; color: var(--primary); font-weight: 600;">Prestataire: ${service.prestataireName}</p>` : ''}
+                </div>
+            `).join('');
+        }
+
+        // PRESTATAIRE FUNCTIONS
+        function showPrestataireInterface() {
+            console.log('💼 Interface PRESTATAIRE');
+            document.getElementById('appDashboard').classList.remove('hidden');
+            document.getElementById('roleSelection').classList.add('hidden');
+            document.getElementById('demandeurInterface').classList.add('hidden');
+            document.getElementById('prestataireInterface').classList.remove('hidden');
+            document.getElementById('chatInterface').classList.add('hidden');
+            document.getElementById('profileSection').classList.add('hidden');
+            document.getElementById('overviewSection').classList.add('hidden');
+            loadAvailableTasks();
+        }
+
+        function loadAvailableTasks() {
+            const availableTasks = services.filter(s => s.status === 'waiting' || (s.status === 'accepted' && s.prestataireId === currentUser.id));
+            const container = document.getElementById('tasksContainer');
+
+            if (availableTasks.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: var(--gray); padding: 2rem;">Aucune tâche disponible</p>';
+                return;
+            }
+
+            container.innerHTML = availableTasks.map(task => `
+                <div class="task-card" onclick="acceptTask(${task.id})">
+                    <div class="task-description">DESCRIPTION: ${task.description}</div>
+                    <div class="task-detail">LA TACHE COMMENCE: ${task.startLocation}</div>
+                    <div class="task-detail">ADRESSE DE LIVRAISON: ${task.deliveryAddress}</div>
+                    <div class="task-budget">Budget: ${task.budget.toLocaleString()}</div>
+                    ${task.prestataireId === currentUser.id ? '<span class="task-status accepted">✅ Vous avez accepté</span>' : '<span class="task-status waiting">Cliquer pour accepter</span>'}
+                </div>
+            `).join('');
+        }
+
+        function acceptTask(taskId) {
+            const task = services.find(s => s.id === taskId);
+            
+            if (!task) return;
+
+            // If already accepted by this prestataire, open chat
+            if (task.prestataireId === currentUser.id) {
+                openChatFromPrestataire(taskId);
+                return;
+            }
+
+            // If not yet accepted, accept it
+            if (task.status === 'waiting') {
+                const serviceIndex = services.findIndex(s => s.id === taskId);
+                services[serviceIndex].status = 'accepted';
+                services[serviceIndex].prestataireId = currentUser.id;
+                services[serviceIndex].prestataireName = currentUser.fullName;
+                localStorage.setItem('djob_services', JSON.stringify(services));
+
+                console.log('✅ Tâche acceptée');
+                
+                // Create notification for demandeur
+                createNotification(
+                    task.demandeurId,
+                    'task_accepted',
+                    '✅ Tâche acceptée',
+                    `${currentUser.fullName} a accepté votre demande: "${task.description}"`,
+                    taskId
+                );
+                
+                alert(`✅ Tâche acceptée! Un chat s'ouvre avec ${task.demandeurName}`);
+                
+                openChatFromPrestataire(taskId);
+            }
+        }
+
+        // CHAT FUNCTIONS
+        function openChatFromDemandeur(serviceId) {
+            const service = services.find(s => s.id === serviceId);
+            if (!service) return;
+
+            if (!service.prestataireId) {
+                alert('⏳ En attente qu\'un prestataire accepte votre demande');
+                return;
+            }
+
+            openChat(serviceId, 'demandeur');
+        }
+
+        function openChatFromPrestataire(serviceId) {
+            openChat(serviceId, 'prestataire');
+        }
+
+        function openChat(serviceId, userRole) {
+            const service = services.find(s => s.id === serviceId);
+            if (!service) return;
+
+            currentChat = {
+                serviceId: serviceId,
+                userRole: userRole,
+                otherUserId: userRole === 'demandeur' ? service.prestataireId : service.demandeurId,
+                otherUserName: userRole === 'demandeur' ? service.prestataireName : service.demandeurName
+            };
+
+            // Hide other interfaces
+            console.log('💬 Ouverture du chat');
+            document.getElementById('appDashboard').classList.remove('hidden');
+            document.getElementById('roleSelection').classList.add('hidden');
+            document.getElementById('demandeurInterface').classList.add('hidden');
+            document.getElementById('prestataireInterface').classList.add('hidden');
+            document.getElementById('profileSection').classList.add('hidden');
+            document.getElementById('overviewSection').classList.add('hidden');
+            document.getElementById('chatInterface').classList.remove('hidden');
+
+            // Set chat header
+            document.getElementById('chatUserInitial').textContent = currentChat.otherUserName[0];
+            document.getElementById('chatUserName').textContent = currentChat.otherUserName;
+            document.getElementById('chatTaskDesc').textContent = service.description;
+            document.getElementById('chatBudget').textContent = service.budget.toLocaleString();
+
+            // Load messages
+            loadChatMessages();
+        }
+
+        function closeChat() {
+            console.log('⬅️ Fermeture du chat');
+            currentChat = null;
+            document.getElementById('chatInterface').classList.add('hidden');
+            
+            // Return to role selection
+            backToRoleSelection();
+        }
+
+        function loadChatMessages() {
+            const chatMessages = messages.filter(m => m.serviceId === currentChat.serviceId);
+            const container = document.getElementById('chatMessages');
+
+            if (chatMessages.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: var(--gray);">Démarrez la conversation...</p>';
+            } else {
+                container.innerHTML = chatMessages.map(msg => {
+                    const isSent = msg.senderId === currentUser.id;
+                    return `
+                        <div class="chat-message ${isSent ? 'sent' : 'received'}">
+                            <div class="message-bubble ${isSent ? 'sent' : 'received'}">
+                                ${msg.type === 'price_proposal' ? `💰 Proposition de prix: ${msg.price} FCFA` : msg.text}
+                            </div>
+                            <div class="message-time">${new Date(msg.timestamp).toLocaleTimeString('fr-FR', {hour: '2-digit', minute: '2-digit'})}</div>
+                        </div>
+                    `;
+                }).join('');
+
+                // Scroll to bottom
+                container.scrollTop = container.scrollHeight;
+            }
+
+            // Check for pending price proposal
+            checkPriceProposal();
+            
+            // Check if task is in progress and show complete button
+            const service = services.find(s => s.id === currentChat.serviceId);
+            if (service && service.status === 'in-progress') {
+                document.getElementById('completeTaskSection').classList.remove('hidden');
+            } else {
+                document.getElementById('completeTaskSection').classList.add('hidden');
+            }
+
+            // Hide rating if task not completed
+            if (!service || service.status !== 'completed') {
+                document.getElementById('ratingSection').classList.add('hidden');
+            }
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const text = input.value.trim();
+
+            if (!text) return;
+
+            const newMessage = {
+                id: Date.now(),
+                serviceId: currentChat.serviceId,
+                senderId: currentUser.id,
+                senderName: currentUser.fullName,
+                text: text,
+                type: 'text',
+                timestamp: new Date().toISOString()
+            };
+
+            messages.push(newMessage);
+            localStorage.setItem('djob_messages', JSON.stringify(messages));
+
+            // Create notification for other user
+            createNotification(
+                currentChat.otherUserId,
+                'new_message',
+                '💬 Nouveau message',
+                `${currentUser.fullName}: ${text.substring(0, 50)}${text.length > 50 ? '...' : ''}`,
+                currentChat.serviceId
+            );
+
+            input.value = '';
+            loadChatMessages();
+        }
+
+        function togglePriceNegotiation() {
+            const negotiation = document.getElementById('priceNegotiation');
+            negotiation.classList.toggle('hidden');
+        }
+
+        function proposePrice() {
+            const newPrice = parseInt(document.getElementById('newPrice').value);
+            
+            if (!newPrice || newPrice < 0) {
+                alert('⚠️ Entrez un prix valide');
+                return;
+            }
+
+            const priceMessage = {
+                id: Date.now(),
+                serviceId: currentChat.serviceId,
+                senderId: currentUser.id,
+                senderName: currentUser.fullName,
+                text: `Proposition de prix: ${newPrice} FCFA`,
+                type: 'price_proposal',
+                price: newPrice,
+                timestamp: new Date().toISOString(),
+                accepted: false
+            };
+
+            messages.push(priceMessage);
+            localStorage.setItem('djob_messages', JSON.stringify(messages));
+
+            // Update service with proposed price
+            const serviceIndex = services.findIndex(s => s.id === currentChat.serviceId);
+            services[serviceIndex].finalPrice = newPrice;
+            services[serviceIndex].priceConfirmedByDemandeur = false;
+            services[serviceIndex].priceConfirmedByPrestataire = false;
+            localStorage.setItem('djob_services', JSON.stringify(services));
+
+            // Create notification
+            createNotification(
+                currentChat.otherUserId,
+                'price_proposal',
+                '💰 Proposition de prix',
+                `${currentUser.fullName} propose ${newPrice} FCFA`,
+                currentChat.serviceId
+            );
+
+            document.getElementById('newPrice').value = '';
+            document.getElementById('priceNegotiation').classList.add('hidden');
+            loadChatMessages();
+
+            alert('💰 Proposition envoyée!');
+        }
+
+        function checkPriceProposal() {
+            const service = services.find(s => s.id === currentChat.serviceId);
+            
+            if (!service || !service.finalPrice) {
+                document.getElementById('priceConfirmation').classList.add('hidden');
+                return;
+            }
+
+            // Check if there's a pending price to confirm
+            const userConfirmed = currentChat.userRole === 'demandeur' ? service.priceConfirmedByDemandeur : service.priceConfirmedByPrestataire;
+            const otherConfirmed = currentChat.userRole === 'demandeur' ? service.priceConfirmedByPrestataire : service.priceConfirmedByDemandeur;
+
+            if (!userConfirmed && service.finalPrice) {
+                document.getElementById('proposedPrice').textContent = service.finalPrice.toLocaleString();
+                document.getElementById('priceConfirmation').classList.remove('hidden');
+            } else {
+                document.getElementById('priceConfirmation').classList.add('hidden');
+            }
+        }
+
+        function acceptPrice() {
+            const serviceIndex = services.findIndex(s => s.id === currentChat.serviceId);
+            
+            if (currentChat.userRole === 'demandeur') {
+                services[serviceIndex].priceConfirmedByDemandeur = true;
+            } else {
+                services[serviceIndex].priceConfirmedByPrestataire = true;
+            }
+
+            localStorage.setItem('djob_services', JSON.stringify(services));
+
+            // Check if both confirmed
+            if (services[serviceIndex].priceConfirmedByDemandeur && services[serviceIndex].priceConfirmedByPrestataire) {
+                services[serviceIndex].status = 'in-progress';
+                localStorage.setItem('djob_services', JSON.stringify(services));
+                
+                alert('✅ Prix confirmé par les deux parties! La tâche est maintenant en cours.');
+                
+                // Add system message
+                const systemMessage = {
+                    id: Date.now(),
+                    serviceId: currentChat.serviceId,
+                    senderId: 0,
+                    senderName: 'Système',
+                    text: `✅ Prix confirmé: ${services[serviceIndex].finalPrice} FCFA. La tâche est en cours.`,
+                    type: 'system',
+                    timestamp: new Date().toISOString()
+                };
+                messages.push(systemMessage);
+                localStorage.setItem('djob_messages', JSON.stringify(messages));
+            } else {
+                alert('✅ Prix accepté! En attente de confirmation de l\'autre partie.');
+            }
+
+            loadChatMessages();
+        }
+
+        function rejectPrice() {
+            alert('❌ Prix refusé. Vous pouvez continuer à négocier.');
+            document.getElementById('priceConfirmation').classList.add('hidden');
+        }
+
+        function getStatusText(status) {
+            const statusMap = {
+                'waiting': '⏳ En attente',
+                'accepted': '✅ Accepté',
+                'in-progress': '🔄 En cours',
+                'completed': '✅ Terminé'
+            };
+            return statusMap[status] || status;
+        }
+
+        // Allow Enter key to send message
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('✅ DOM chargé - DJOB System Ready');
+            console.log('✅ openAuthModal disponible:', typeof openAuthModal === 'function');
+            
+            const messageInput = document.getElementById('messageInput');
+            if (messageInput) {
+                messageInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        sendMessage();
+                    }
+                });
+            }
+
+            // Test modal existence
+            const authModal = document.getElementById('authModal');
+            console.log('✅ authModal existe:', !!authModal);
+            
+            // Load notifications if user logged in
+            if (currentUser) {
+                updateNotificationBadge();
+            }
+        });
+
+        // Global test function
+        window.testModal = function() {
+            console.log('🧪 Test manuel du modal');
+            openAuthModal();
+        };
+
+        // AUTH
+        // AUTH
+        function openAuthModal() {
+            console.log('🔓 Ouverture du modal d\'authentification');
+            const modal = document.getElementById('authModal');
+            if (modal) {
+                modal.classList.add('active');
+                console.log('✅ Modal ouvert');
+            } else {
+                console.error('❌ Modal authModal introuvable');
+            }
+        }
+
+        function closeAuthModal() {
+            console.log('🔒 Fermeture du modal');
+            document.getElementById('authModal').classList.remove('active');
+        }
+
+        function showAuthTab(tab) {
+            const tabs = document.querySelectorAll('.tab-btn');
+            tabs.forEach(t => t.classList.remove('active'));
+            
+            if (tab === 'login') {
+                document.getElementById('loginForm').classList.remove('hidden');
+                document.getElementById('registerForm').classList.add('hidden');
+                tabs[0].classList.add('active');
+            } else {
+                document.getElementById('loginForm').classList.add('hidden');
+                document.getElementById('registerForm').classList.remove('hidden');
+                tabs[1].classList.add('active');
+            }
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            console.log('Tentative de connexion:', email);
+            console.log('Utilisateurs enregistrés:', users.length);
+
+            // Check if admin
+            if (ADMIN_EMAILS.includes(email)) {
+                currentUser = { email, name: email.split('@')[0], role: 'admin' };
+                showAdminPanel();
+                closeAuthModal();
+                return;
+            }
+
+            // Find user
+            const user = users.find(u => u.email === email);
+            console.log('Utilisateur trouvé:', user ? 'Oui' : 'Non');
+            
+            if (user) {
+                console.log('Mot de passe correct:', user.password === password);
+                console.log('Rôles sélectionnés:', user.rolesSelected);
+                console.log('✅ MODE TEST: Vérification désactivée');
+            }
+
+            if (user && user.password === password) {
+                currentUser = user;
+                closeAuthModal();
+                
+                if (!user.rolesSelected) {
+                    console.log('→ Redirection vers sélection des rôles');
+                    showRoleSelection();
+                } else {
+                    console.log('→ Accès direct au dashboard (mode test)');
+                    showApp(); // Direct access - no verification check
+                }
+            } else {
+                console.log('❌ Échec de connexion');
+                showAlert('authAlerts', 'error', '❌ Email ou mot de passe incorrect');
+            }
+        }
+
+        function handleRegister(e) {
+            e.preventDefault();
+            
+            console.log('🔵 Début de l\'inscription...');
+            
+            const username = document.getElementById('regUsername').value;
+            const fullName = document.getElementById('regFullName').value;
+            const email = document.getElementById('regEmail').value;
+            const phone = document.getElementById('regPhone').value;
+            const password = document.getElementById('regPassword').value;
+            const confirmPassword = document.getElementById('regPasswordConfirm').value;
+
+            console.log('📝 Données du formulaire:', {
+                username, fullName, email, phone
+            });
+
+            // Validation mot de passe
+            if (password !== confirmPassword) {
+                console.log('❌ Mots de passe différents');
+                showAlert('authAlerts', 'error', '❌ Les mots de passe ne correspondent pas');
+                return;
+            }
+            console.log('✅ Mots de passe identiques');
+
+            // Création utilisateur
+            const newUser = {
+                id: Date.now(),
+                username: username,
+                fullName: fullName,
+                email: email,
+                phone: phone,
+                address: '',
+                bio: '',
+                photo: '',
+                idCard: '',
+                password: password,
+                roles: [],
+                rolesSelected: false,
+                verified: true, // AUTO-VERIFIED IN TEST MODE
+                profileCompleted: false,
+                createdAt: new Date().toISOString(),
+                demandesCount: 0,
+                prestationsCount: 0,
+                rating: 5.0
+            };
+
+            console.log('👤 Nouvel utilisateur créé:', newUser);
+
+            users.push(newUser);
+            localStorage.setItem('djob_users', JSON.stringify(users));
+            
+            console.log('💾 Utilisateur sauvegardé. Total utilisateurs:', users.length);
+            console.log('✅ Inscription réussie!');
+
+            showAlert('authAlerts', 'success', '✅ Compte créé! Bienvenue sur DJOB.');
+            currentUser = newUser;
+            
+            setTimeout(() => {
+                console.log('➡️ Accès au choix d\'action...');
+                closeAuthModal();
+                showApp();
+            }, 1500);
+        }
+
+        function handleLogout() {
+            currentUser = null;
+            selectedRoles = [];
+            document.getElementById('marketingPage').style.display = 'block';
+            document.getElementById('appContainer').classList.remove('active');
+            document.getElementById('adminPanel').classList.remove('active');
+        }
+
+        // ROLE SELECTION
+        function showRoleSelection() {
+            console.log('📋 Affichage sélection des rôles');
+            document.getElementById('marketingPage').style.display = 'none';
+            document.getElementById('appContainer').classList.add('active');
+            document.getElementById('roleSelection').classList.remove('hidden');
+            document.getElementById('verificationPending').classList.add('hidden');
+            document.getElementById('appDashboard').classList.add('hidden');
+            document.getElementById('appUserName').textContent = currentUser.username;
+        }
+
+        function showApp() {
+            console.log('📱 Affichage de l\'écran de choix');
+            document.getElementById('marketingPage').style.display = 'none';
+            document.getElementById('appContainer').classList.add('active');
+            document.getElementById('roleSelection').classList.remove('hidden');
+            document.getElementById('verificationPending').classList.add('hidden');
+            document.getElementById('appDashboard').classList.remove('hidden'); // Keep dashboard active but sections hidden
+            document.getElementById('demandeurInterface').classList.add('hidden');
+            document.getElementById('prestataireInterface').classList.add('hidden');
+            document.getElementById('chatInterface').classList.add('hidden');
+            document.getElementById('profileSection').classList.add('hidden');
+            document.getElementById('overviewSection').classList.add('hidden');
+            document.getElementById('appUserName').textContent = currentUser.username;
+            
+            // Load notifications
+            updateNotificationBadge();
+        }
+
+        function showProfileSection() {
+            console.log('👤 Affichage du profil');
+            document.getElementById('appDashboard').classList.remove('hidden');
+            document.getElementById('roleSelection').classList.add('hidden');
+            document.getElementById('demandeurInterface').classList.add('hidden');
+            document.getElementById('prestataireInterface').classList.add('hidden');
+            document.getElementById('chatInterface').classList.add('hidden');
+            document.getElementById('overviewSection').classList.add('hidden');
+            document.getElementById('profileSection').classList.remove('hidden');
+            loadUserProfile();
+        }
+
+        function showOverviewSection() {
+            console.log('📊 Retour au tableau de bord');
+            document.getElementById('profileSection').classList.add('hidden');
+            document.getElementById('overviewSection').classList.remove('hidden');
+            
+            // Update alert visibility
+            if (!currentUser.profileCompleted) {
+                document.getElementById('completeProfileAlert').style.display = 'block';
+            } else {
+                document.getElementById('completeProfileAlert').style.display = 'none';
+            }
+        }
+
+        function loadUserProfile() {
+            document.getElementById('profileUsername').value = currentUser.username;
+            document.getElementById('profileFullName').value = currentUser.fullName;
+            document.getElementById('profileEmail').value = currentUser.email;
+            document.getElementById('profilePhone').value = currentUser.phone;
+            document.getElementById('profileAddress').value = currentUser.address || '';
+            document.getElementById('profileBio').value = currentUser.bio || '';
+            
+            // Update photo/ID status
+            if (currentUser.photo) {
+                document.getElementById('profilePhotoPreview').src = currentUser.photo;
+                document.getElementById('profilePhotoPreview').classList.add('active');
+                document.getElementById('profilePhotoText').textContent = '✅ Photo ajoutée';
+            }
+            
+            if (currentUser.idCard) {
+                document.getElementById('profileIdCardText').textContent = '✅ CNI ajoutée';
+            }
+            
+            // Check profile completion
+            checkProfileCompletion();
+        }
+
+        function handleProfilePhoto(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    currentUser.photo = e.target.result;
+                    document.getElementById('profilePhotoPreview').src = e.target.result;
+                    document.getElementById('profilePhotoPreview').classList.add('active');
+                    document.getElementById('profilePhotoText').textContent = '✅ Photo ajoutée';
+                    checkProfileCompletion();
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function handleProfileIdCard(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    currentUser.idCard = e.target.result;
+                    document.getElementById('profileIdCardText').textContent = '✅ CNI ajoutée: ' + input.files[0].name;
+                    checkProfileCompletion();
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function checkProfileCompletion() {
+            const hasPhoto = currentUser.photo && currentUser.photo !== '';
+            const hasIdCard = currentUser.idCard && currentUser.idCard !== '';
+            const hasAddress = currentUser.address && currentUser.address !== '';
+            
+            const isComplete = hasPhoto && hasIdCard && hasAddress;
+            
+            if (isComplete) {
+                document.getElementById('profileWarning').style.display = 'none';
+            } else {
+                document.getElementById('profileWarning').style.display = 'block';
+            }
+            
+            console.log('Profil complet:', isComplete, {hasPhoto, hasIdCard, hasAddress});
+            
+            return isComplete;
+        }
+
+        function handleProfileUpdate(e) {
+            e.preventDefault();
+            
+            console.log('💾 Mise à jour du profil...');
+            
+            currentUser.address = document.getElementById('profileAddress').value;
+            currentUser.bio = document.getElementById('profileBio').value;
+            
+            const isComplete = checkProfileCompletion();
+            
+            if (!isComplete) {
+                showAlert('profileAlerts', 'warning', '⚠️ Veuillez ajouter votre photo, CNI et adresse');
+                return;
+            }
+            
+            currentUser.profileCompleted = true;
+            
+            // Update in storage
+            const userIndex = users.findIndex(u => u.id === currentUser.id);
+            if (userIndex !== -1) {
+                users[userIndex] = currentUser;
+                localStorage.setItem('djob_users', JSON.stringify(users));
+            }
+            
+            console.log('✅ Profil sauvegardé');
+            showAlert('profileAlerts', 'success', '✅ Profil sauvegardé avec succès!');
+            
+            setTimeout(() => {
+                showOverviewSection();
+            }, 2000);
+        }
+
+        // ADMIN
+        function showAdminPanel() {
+            document.getElementById('marketingPage').style.display = 'none';
+            document.getElementById('adminPanel').classList.add('active');
+            document.getElementById('adminName').textContent = currentUser.name;
+            loadAdminData();
+        }
+
+        function showAdminSection(section) {
+            document.querySelectorAll('.admin-section').forEach(s => s.classList.add('hidden'));
+            document.querySelectorAll('.admin-menu li').forEach(li => li.classList.remove('active'));
+            
+            const sectionMap = {
+                'dashboard': 'adminDashboard',
+                'verification': 'adminVerification',
+                'users': 'adminUsers',
+                'services': 'adminServices',
+                'stats': 'adminStats',
+                'settings': 'adminSettings'
+            };
+
+            document.getElementById(sectionMap[section]).classList.remove('hidden');
+            event.target.classList.add('active');
+        }
+
+        function loadAdminData() {
+            document.getElementById('adminStatUsers').textContent = users.length;
+            document.getElementById('adminStatServices').textContent = services.filter(s => s.status !== 'completed').length;
+            document.getElementById('adminStatPending').textContent = '0 (Mode test)';
+            
+            loadVerificationTable();
+            loadUsersTable();
+            loadStatsTable();
+        }
+
+        function loadVerificationTable() {
+            const tbody = document.getElementById('verificationTable');
+            tbody.innerHTML = '<tr><td colspan="5" style="text-align: center; color: var(--gray);">🧪 Mode test activé - Tous les comptes ont un accès immédiat</td></tr>';
+        }
+
+        function loadServicesTable() {
+            const tbody = document.getElementById('servicesTable');
+
+            if (services.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="10" style="text-align: center;">Aucun service</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = services.map(service => {
+                const demandeur = users.find(u => u.id === service.demandeurId);
+                const prestataire = users.find(u => u.id === service.prestataireId);
+                const commission = service.finalPrice ? Math.round(service.finalPrice * 0.15) : Math.round(service.budget * 0.15);
+                
+                return `
+                    <tr>
+                        <td><strong>#${service.id.toString().slice(-4)}</strong></td>
+                        <td>${demandeur ? demandeur.fullName : 'Inconnu'}</td>
+                        <td>${prestataire ? prestataire.fullName : '-'}</td>
+                        <td>${service.description}</td>
+                        <td>${service.budget.toLocaleString()} FCFA</td>
+                        <td>${service.finalPrice ? service.finalPrice.toLocaleString() + ' FCFA' : '-'}</td>
+                        <td style="color: #10B981; font-weight: 600;">${commission.toLocaleString()} FCFA</td>
+                        <td><span class="status-badge status-${service.status}">${getStatusText(service.status)}</span></td>
+                        <td>${new Date(service.createdAt).toLocaleDateString('fr-FR')}</td>
+                        <td>
+                            <button class="action-btn view" onclick="viewServiceDetail(${service.id})">👁 Détails</button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function viewServiceDetail(serviceId) {
+            const service = services.find(s => s.id === serviceId);
+            if (!service) return;
+
+            const demandeur = users.find(u => u.id === service.demandeurId);
+            const prestataire = users.find(u => u.id === service.prestataireId);
+            const serviceMessages = messages.filter(m => m.serviceId === serviceId);
+            const commission = service.finalPrice ? Math.round(service.finalPrice * 0.15) : 0;
+
+            const content = document.getElementById('serviceDetailContent');
+            content.innerHTML = `
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
+                    <div>
+                        <h4 style="color: var(--gray); margin-bottom: 0.5rem;">📋 Informations</h4>
+                        <p><strong>ID:</strong> #${service.id}</p>
+                        <p><strong>Description:</strong> ${service.description}</p>
+                        <p><strong>Départ:</strong> ${service.startLocation}</p>
+                        <p><strong>Livraison:</strong> ${service.deliveryAddress}</p>
+                        <p><strong>Statut:</strong> <span class="status-badge status-${service.status}">${getStatusText(service.status)}</span></p>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--gray); margin-bottom: 0.5rem;">💰 Finances</h4>
+                        <p><strong>Budget initial:</strong> ${service.budget.toLocaleString()} FCFA</p>
+                        <p><strong>Prix négocié:</strong> ${service.finalPrice ? service.finalPrice.toLocaleString() + ' FCFA' : 'Non fixé'}</p>
+                        <p><strong>Commission DJOB (15%):</strong> <span style="color: #10B981; font-weight: 600;">${commission.toLocaleString()} FCFA</span></p>
+                        <p><strong>Prestataire reçoit:</strong> ${service.finalPrice ? (service.finalPrice - commission).toLocaleString() + ' FCFA' : '-'}</p>
+                    </div>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
+                    <div>
+                        <h4 style="color: var(--gray); margin-bottom: 0.5rem;">🛎️ Demandeur</h4>
+                        <p><strong>Nom:</strong> ${demandeur ? demandeur.fullName : 'Inconnu'}</p>
+                        <p><strong>Email:</strong> ${demandeur ? demandeur.email : '-'}</p>
+                        <p><strong>Téléphone:</strong> ${demandeur ? demandeur.phone : '-'}</p>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--gray); margin-bottom: 0.5rem;">💼 Prestataire</h4>
+                        <p><strong>Nom:</strong> ${prestataire ? prestataire.fullName : 'Pas encore accepté'}</p>
+                        <p><strong>Email:</strong> ${prestataire ? prestataire.email : '-'}</p>
+                        <p><strong>Téléphone:</strong> ${prestataire ? prestataire.phone : '-'}</p>
+                    </div>
+                </div>
+            `;
+
+            // Load chat history
+            const chatContainer = document.getElementById('adminChatHistory');
+            if (serviceMessages.length === 0) {
+                chatContainer.innerHTML = '<p style="text-align: center; color: var(--gray); padding: 1rem;">Aucun message</p>';
+            } else {
+                chatContainer.innerHTML = serviceMessages.map(msg => `
+                    <div style="margin-bottom: 1rem; padding: 1rem; background: white; border-radius: 8px; border-left: 3px solid ${msg.senderId === service.demandeurId ? '#8B5CF6' : '#10B981'};">
+                        <div style="font-weight: 600; color: var(--gray-dark);">${msg.senderName}</div>
+                        <div style="margin: 0.5rem 0;">${msg.text}</div>
+                        <div style="font-size: 0.75rem; color: var(--gray);">${new Date(msg.timestamp).toLocaleString('fr-FR')}</div>
+                    </div>
+                `).join('');
+            }
+
+            document.getElementById('serviceDetailModal').classList.add('active');
+        }
+
+        function closeServiceDetail() {
+            document.getElementById('serviceDetailModal').classList.remove('active');
+        }
+
+        function loadUsersTable() {
+            const tbody = document.getElementById('usersTable');
+            const verified = users.filter(u => u.verified);
+
+            if (verified.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" style="text-align: center;">Aucun utilisateur</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = verified.map(u => `
+                <tr>
+                    <td><strong>${u.fullName}</strong></td>
+                    <td>${u.roles.join(', ')}</td>
+                    <td>${u.email}</td>
+                    <td><span class="status-badge status-verified">Vérifié</span></td>
+                    <td>
+                        <button class="action-btn view" onclick="viewUser(${u.id})">👁 Voir</button>
+                        <button class="action-btn reject" onclick="deleteUser(${u.id})">🗑 Supprimer</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function loadStatsTable() {
+            const tbody = document.getElementById('statsUsersTable');
+
+            if (users.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align: center;">Aucun utilisateur</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = users.map(u => `
+                <tr>
+                    <td>${u.fullName}</td>
+                    <td>${u.username}</td>
+                    <td>${u.roles.join(', ') || 'Non défini'}</td>
+                    <td>${u.demandesCount || 0}</td>
+                    <td>${u.prestationsCount || 0}</td>
+                    <td><strong>${(u.demandesCount || 0) + (u.prestationsCount || 0)}</strong></td>
+                </tr>
+            `).join('');
+        }
+
+        function approveUser(userId) {
+            if (confirm('Approuver cet utilisateur ?')) {
+                const index = users.findIndex(u => u.id === userId);
+                if (index !== -1) {
+                    users[index].verified = true;
+                    localStorage.setItem('djob_users', JSON.stringify(users));
+                    loadAdminData();
+                    alert('✅ Utilisateur approuvé!');
+                }
+            }
+        }
+
+        function rejectUser(userId) {
+            if (confirm('Rejeter cette demande ?')) {
+                users = users.filter(u => u.id !== userId);
+                localStorage.setItem('djob_users', JSON.stringify(users));
+                loadAdminData();
+                alert('❌ Demande rejetée');
+            }
+        }
+
+        function deleteUser(userId) {
+            if (confirm('Supprimer définitivement ?')) {
+                users = users.filter(u => u.id !== userId);
+                localStorage.setItem('djob_users', JSON.stringify(users));
+                loadAdminData();
+                alert('🗑 Utilisateur supprimé');
+            }
+        }
+
+        function viewUser(userId) {
+            const user = users.find(u => u.id === userId);
+            if (user) {
+                alert(`Détails:\n\nNom: ${user.fullName}\nEmail: ${user.email}\nTéléphone: ${user.phone}\nRôles: ${user.roles.join(', ')}\nDemandes: ${user.demandesCount || 0}\nPrestations: ${user.prestationsCount || 0}`);
+            }
+        }
+
+        // UTILITIES
+        function fillTestData() {
+            console.log('🧪 Remplissage avec données de test');
+            document.getElementById('regUsername').value = 'TestUser' + Date.now();
+            document.getElementById('regFullName').value = 'Test Utilisateur';
+            document.getElementById('regEmail').value = 'test' + Date.now() + '@djob.ci';
+            document.getElementById('regPhone').value = '+225 07 12 34 56 78';
+            document.getElementById('regPassword').value = 'test1234';
+            document.getElementById('regPasswordConfirm').value = 'test1234';
+            
+            showAlert('authAlerts', 'success', '✅ Formulaire rempli! Vous pourrez ajouter photo, CNI et adresse après inscription.');
+        }
+
+        function showAlert(containerId, type, message) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = `<div class="alert alert-${type}">${message}</div>`;
+            setTimeout(() => container.innerHTML = '', 4000);
+        }
+
+        window.onclick = function(event) {
+            if (event.target === document.getElementById('authModal')) {
+                closeAuthModal();
+            }
+        }
+    </script>
+</body>
+</html>
