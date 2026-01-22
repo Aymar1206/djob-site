@@ -2,9 +2,10 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>DJOB - Marketplace de Services en Côte d'Ivoire</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
         * {
             margin: 0;
@@ -106,6 +107,13 @@
             cursor: pointer;
             transition: all 0.3s;
             font-size: 1rem;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            min-height: 44px;
+        }
+
+        .btn:active {
+            transform: scale(0.97);
         }
 
         .btn-primary {
@@ -1155,6 +1163,157 @@
             transition: all 0.3s;
         }
 
+        /* Service Categories */
+        .category-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .category-card {
+            background: white;
+            border: 2px solid var(--gray-light);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+
+        .category-card:active {
+            transform: scale(0.95);
+        }
+
+        .category-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(139, 92, 246, 0.2);
+        }
+
+        .category-card.selected {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1));
+        }
+
+        .category-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .category-name {
+            font-weight: 600;
+            color: var(--gray-dark);
+            font-size: 0.95rem;
+        }
+
+        .category-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--light-bg);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--gray-dark);
+            font-weight: 600;
+        }
+
+        .filter-section {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .filter-chips {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .filter-chip {
+            background: var(--light-bg);
+            border: 1px solid var(--gray-light);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+
+        .filter-chip:active {
+            transform: scale(0.95);
+        }
+
+        .filter-chip:hover {
+            border-color: var(--primary);
+            background: rgba(139, 92, 246, 0.1);
+        }
+
+        .filter-chip.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Map & Geolocation */
+        .map-container {
+            width: 100%;
+            height: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 1rem 0;
+            border: 2px solid var(--gray-light);
+        }
+
+        .location-input-group {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .location-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            white-space: nowrap;
+            transition: all 0.3s;
+        }
+
+        .location-btn:hover {
+            background: #7C3AED;
+            transform: translateY(-2px);
+        }
+
+        .distance-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            background: #DBEAFE;
+            color: #1E40AF;
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .coordinates-display {
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-top: 0.5rem;
+        }
+
         /* Responsive */
         @media (max-width: 968px) {
             .nav-links { display: none; }
@@ -1164,6 +1323,109 @@
             .role-cards { grid-template-columns: 1fr; }
             .admin-sidebar { width: 200px; }
             .admin-content { margin-left: 200px; }
+            
+            /* Mobile-specific fixes */
+            .app-content {
+                padding: 1rem;
+                padding-top: 5rem;
+            }
+            
+            .card {
+                padding: 1rem;
+                margin: 1rem 0;
+            }
+            
+            .category-selector {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+            }
+            
+            .category-card {
+                padding: 1rem;
+            }
+            
+            .category-icon {
+                font-size: 2rem;
+            }
+            
+            .category-name {
+                font-size: 0.85rem;
+            }
+            
+            .form-group label {
+                font-size: 0.9rem;
+            }
+            
+            .form-group input,
+            .form-group textarea {
+                font-size: 16px; /* Prevents zoom on iOS */
+            }
+            
+            .location-input-group {
+                flex-direction: column;
+            }
+            
+            .location-btn {
+                width: 100%;
+            }
+            
+            .task-card {
+                padding: 1rem;
+            }
+            
+            .filter-chips {
+                gap: 0.3rem;
+            }
+            
+            .filter-chip {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.8rem;
+            }
+            
+            .notification-panel {
+                right: 1rem;
+                left: 1rem;
+                width: auto;
+            }
+            
+            .app-header {
+                padding: 1rem;
+            }
+            
+            .app-header > div:last-child {
+                gap: 0.5rem;
+            }
+            
+            .app-header button {
+                font-size: 0.85rem;
+                padding: 0.5rem 1rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .category-selector {
+                grid-template-columns: 1fr;
+            }
+            
+            .trust-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+            
+            .modal-content {
+                padding: 1.5rem;
+            }
+            
+            .auth-form input {
+                font-size: 16px; /* Prevents zoom on iOS */
+            }
         }
     </style>
 </head>
@@ -1508,18 +1770,40 @@
 
                         <form onsubmit="publishService(event)">
                             <div class="form-group">
+                                <label style="font-weight: 700;">📂 Catégorie du service</label>
+                                <div class="category-selector" id="categorySelector">
+                                    <!-- Categories will be populated here -->
+                                </div>
+                                <input type="hidden" id="serviceCategory" required>
+                            </div>
+
+                            <div class="form-group">
                                 <label style="font-size: 0.9rem;">Description de la tâche</label>
                                 <textarea id="serviceDescription" rows="3" required placeholder="Ex: Acheter des médicaments"></textarea>
                             </div>
 
                             <div class="form-group">
                                 <label style="font-weight: 700;">Où commence la tâche ?</label>
-                                <input type="text" id="serviceStart" placeholder="Ex: Chez moi" required>
+                                <div class="location-input-group">
+                                    <input type="text" id="serviceStart" placeholder="Ex: Chez moi" required style="flex: 1;">
+                                    <button type="button" class="location-btn" onclick="getMyLocation('start')">📍 Ma position</button>
+                                </div>
+                                <div id="startMap" class="map-container hidden"></div>
+                                <div id="startCoords" class="coordinates-display"></div>
+                                <input type="hidden" id="startLat">
+                                <input type="hidden" id="startLng">
                             </div>
 
                             <div class="form-group">
                                 <label style="font-weight: 700;">Adresse de livraison !</label>
-                                <input type="text" id="serviceAddress" placeholder="Donner toutes les précisions svp !!!" required>
+                                <div class="location-input-group">
+                                    <input type="text" id="serviceAddress" placeholder="Donner toutes les précisions svp !!!" required style="flex: 1;">
+                                    <button type="button" class="location-btn" onclick="getMyLocation('delivery')">📍 Ma position</button>
+                                </div>
+                                <div id="deliveryMap" class="map-container hidden"></div>
+                                <div id="deliveryCoords" class="coordinates-display"></div>
+                                <input type="hidden" id="deliveryLat">
+                                <input type="hidden" id="deliveryLng">
                             </div>
 
                             <div class="form-group">
@@ -1546,6 +1830,15 @@
                     <div id="tasksList" class="card">
                         <button onclick="backToRoleSelection()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; margin-bottom: 1rem;">←</button>
                         <h2 style="text-align: center; font-size: 1.8rem; font-weight: 700;">Liste des tâches</h2>
+                        
+                        <!-- Category Filter -->
+                        <div class="filter-section">
+                            <h3 style="font-size: 1rem; margin-bottom: 0.5rem;">🔍 Filtrer par catégorie</h3>
+                            <div class="filter-chips" id="categoryFilter">
+                                <div class="filter-chip active" onclick="filterByCategory('all')">Toutes</div>
+                            </div>
+                        </div>
+
                         <div id="tasksContainer" style="margin-top: 2rem;"></div>
                     </div>
                 </div>
@@ -1950,6 +2243,193 @@
         let notifications = JSON.parse(localStorage.getItem('djob_notifications') || '[]');
         let currentChat = null;
         let selectedRating = 0;
+        let selectedCategory = '';
+        let currentCategoryFilter = 'all';
+
+        // SERVICE CATEGORIES
+        const SERVICE_CATEGORIES = [
+            { id: 'livraison', name: 'Livraison', icon: '🚚' },
+            { id: 'courses', name: 'Courses', icon: '🛒' },
+            { id: 'menage', name: 'Ménage', icon: '🧹' },
+            { id: 'plomberie', name: 'Plomberie', icon: '🔧' },
+            { id: 'electricite', name: 'Électricité', icon: '💡' },
+            { id: 'jardinage', name: 'Jardinage', icon: '🌱' },
+            { id: 'peinture', name: 'Peinture', icon: '🎨' },
+            { id: 'demenagement', name: 'Déménagement', icon: '📦' },
+            { id: 'reparation', name: 'Réparation', icon: '🔨' },
+            { id: 'autre', name: 'Autre', icon: '📋' }
+        ];
+
+        function loadCategories() {
+            const container = document.getElementById('categorySelector');
+            if (!container) return;
+
+            container.innerHTML = SERVICE_CATEGORIES.map((cat, index) => `
+                <div class="category-card" data-category="${cat.id}" onclick="selectCategory('${cat.id}')" ontouchstart="this.style.opacity='0.7'" ontouchend="this.style.opacity='1'">
+                    <div class="category-icon">${cat.icon}</div>
+                    <div class="category-name">${cat.name}</div>
+                </div>
+            `).join('');
+        }
+
+        function selectCategory(categoryId) {
+            selectedCategory = categoryId;
+            document.getElementById('serviceCategory').value = categoryId;
+
+            // Update UI
+            document.querySelectorAll('.category-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Find and select the clicked category card
+            const cards = document.querySelectorAll('.category-card');
+            cards.forEach((card, index) => {
+                if (SERVICE_CATEGORIES[index].id === categoryId) {
+                    card.classList.add('selected');
+                }
+            });
+            
+            console.log('✅ Catégorie sélectionnée:', categoryId);
+        }
+
+        function loadCategoryFilters() {
+            const container = document.getElementById('categoryFilter');
+            if (!container) return;
+
+            const allChip = '<div class="filter-chip active" onclick="filterByCategory(\'all\')" ontouchstart="this.style.opacity=\'0.7\'" ontouchend="this.style.opacity=\'1\'">Toutes</div>';
+            const categoryChips = SERVICE_CATEGORIES.map(cat => `
+                <div class="filter-chip" onclick="filterByCategory('${cat.id}')" ontouchstart="this.style.opacity='0.7'" ontouchend="this.style.opacity='1'">${cat.icon} ${cat.name}</div>
+            `).join('');
+
+            container.innerHTML = allChip + categoryChips;
+        }
+
+        function filterByCategory(categoryId) {
+            currentCategoryFilter = categoryId;
+            
+            // Update filter chips
+            document.querySelectorAll('.filter-chip').forEach(chip => {
+                chip.classList.remove('active');
+            });
+            
+            // Find the clicked chip by checking text content
+            document.querySelectorAll('.filter-chip').forEach(chip => {
+                const chipText = chip.textContent.toLowerCase();
+                if ((categoryId === 'all' && chipText.includes('toutes')) || 
+                    chipText.includes(categoryId)) {
+                    chip.classList.add('active');
+                }
+            });
+
+            console.log('🔍 Filtre catégorie:', categoryId);
+            
+            // Reload tasks with filter
+            loadAvailableTasks();
+        }
+
+        function getCategoryInfo(categoryId) {
+            return SERVICE_CATEGORIES.find(c => c.id === categoryId) || { name: 'Autre', icon: '📋' };
+        }
+
+        // GEOLOCATION & MAP FUNCTIONS
+        let startMap = null;
+        let deliveryMap = null;
+        let startMarker = null;
+        let deliveryMarker = null;
+
+        function getMyLocation(type) {
+            if (!navigator.geolocation) {
+                alert('❌ La géolocalisation n\'est pas supportée par votre navigateur');
+                return;
+            }
+
+            const button = event.target;
+            button.textContent = '⏳ Localisation...';
+            button.disabled = true;
+
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const lat = position.coords.latitude;
+                    const lng = position.coords.longitude;
+
+                    if (type === 'start') {
+                        document.getElementById('startLat').value = lat;
+                        document.getElementById('startLng').value = lng;
+                        document.getElementById('startCoords').textContent = `📍 Position: ${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+                        showMap('start', lat, lng);
+                    } else {
+                        document.getElementById('deliveryLat').value = lat;
+                        document.getElementById('deliveryLng').value = lng;
+                        document.getElementById('deliveryCoords').textContent = `📍 Position: ${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+                        showMap('delivery', lat, lng);
+                    }
+
+                    button.textContent = '✅ Position obtenue';
+                    button.disabled = false;
+
+                    setTimeout(() => {
+                        button.textContent = '📍 Ma position';
+                    }, 2000);
+                },
+                (error) => {
+                    console.error('Erreur de géolocalisation:', error);
+                    alert('❌ Impossible d\'obtenir votre position. Vérifiez les autorisations.');
+                    button.textContent = '📍 Ma position';
+                    button.disabled = false;
+                }
+            );
+        }
+
+        function showMap(type, lat, lng) {
+            const mapId = type === 'start' ? 'startMap' : 'deliveryMap';
+            const mapContainer = document.getElementById(mapId);
+            mapContainer.classList.remove('hidden');
+
+            // Initialize map if not already done
+            if (type === 'start') {
+                if (startMap) {
+                    startMap.remove();
+                }
+                startMap = L.map(mapId).setView([lat, lng], 15);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap contributors'
+                }).addTo(startMap);
+                startMarker = L.marker([lat, lng]).addTo(startMap)
+                    .bindPopup('📍 Point de départ')
+                    .openPopup();
+            } else {
+                if (deliveryMap) {
+                    deliveryMap.remove();
+                }
+                deliveryMap = L.map(mapId).setView([lat, lng], 15);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap contributors'
+                }).addTo(deliveryMap);
+                deliveryMarker = L.marker([lat, lng]).addTo(deliveryMap)
+                    .bindPopup('📍 Point de livraison')
+                    .openPopup();
+            }
+        }
+
+        function calculateDistance(lat1, lon1, lat2, lon2) {
+            // Haversine formula for distance calculation
+            const R = 6371; // Radius of Earth in km
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+            const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                     Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                     Math.sin(dLon/2) * Math.sin(dLon/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            const distance = R * c;
+            return distance;
+        }
+
+        function formatDistance(km) {
+            if (km < 1) {
+                return `${Math.round(km * 1000)} m`;
+            }
+            return `${km.toFixed(1)} km`;
+        }
 
         // NOTIFICATION SYSTEM
         function createNotification(userId, type, title, text, serviceId = null) {
@@ -2271,20 +2751,41 @@
             document.getElementById('overviewSection').classList.add('hidden');
             document.getElementById('createServiceForm').classList.remove('hidden');
             document.getElementById('myRequestsList').classList.add('hidden');
+            
+            // Load categories
+            loadCategories();
         }
 
         function publishService(e) {
             e.preventDefault();
             
+            if (!selectedCategory) {
+                showAlert('serviceFormAlerts', 'error', '⚠️ Veuillez sélectionner une catégorie');
+                return;
+            }
+
+            const categoryInfo = getCategoryInfo(selectedCategory);
+            const startLat = document.getElementById('startLat').value;
+            const startLng = document.getElementById('startLng').value;
+            const deliveryLat = document.getElementById('deliveryLat').value;
+            const deliveryLng = document.getElementById('deliveryLng').value;
+
             const newService = {
                 id: Date.now(),
                 demandeurId: currentUser.id,
                 demandeurName: currentUser.fullName,
+                category: selectedCategory,
+                categoryName: categoryInfo.name,
+                categoryIcon: categoryInfo.icon,
                 description: document.getElementById('serviceDescription').value,
                 startLocation: document.getElementById('serviceStart').value,
                 deliveryAddress: document.getElementById('serviceAddress').value,
+                startLat: startLat ? parseFloat(startLat) : null,
+                startLng: startLng ? parseFloat(startLng) : null,
+                deliveryLat: deliveryLat ? parseFloat(deliveryLat) : null,
+                deliveryLng: deliveryLng ? parseFloat(deliveryLng) : null,
                 budget: parseInt(document.getElementById('serviceBudget').value),
-                status: 'waiting', // waiting, accepted, in-progress, completed
+                status: 'waiting',
                 prestataireId: null,
                 prestataireName: null,
                 finalPrice: null,
@@ -2304,6 +2805,26 @@
             document.getElementById('serviceStart').value = '';
             document.getElementById('serviceAddress').value = '';
             document.getElementById('serviceBudget').value = '';
+            document.getElementById('startLat').value = '';
+            document.getElementById('startLng').value = '';
+            document.getElementById('deliveryLat').value = '';
+            document.getElementById('deliveryLng').value = '';
+            document.getElementById('startCoords').textContent = '';
+            document.getElementById('deliveryCoords').textContent = '';
+            document.getElementById('startMap').classList.add('hidden');
+            document.getElementById('deliveryMap').classList.add('hidden');
+            selectedCategory = '';
+            document.querySelectorAll('.category-card').forEach(card => card.classList.remove('selected'));
+
+            // Clean up maps
+            if (startMap) {
+                startMap.remove();
+                startMap = null;
+            }
+            if (deliveryMap) {
+                deliveryMap.remove();
+                deliveryMap = null;
+            }
 
             setTimeout(() => {
                 showMyRequests();
@@ -2330,16 +2851,22 @@
                 return;
             }
 
-            container.innerHTML = myServices.map(service => `
-                <div class="task-card" onclick="openChatFromDemandeur(${service.id})">
-                    <div class="task-description">DESCRIPTION: ${service.description}</div>
-                    <div class="task-detail">LA TACHE COMMENCE: ${service.startLocation}</div>
-                    <div class="task-detail">ADRESSE DE LIVRAISON: ${service.deliveryAddress}</div>
-                    <div class="task-budget">Budget: ${service.budget.toLocaleString()}</div>
-                    <span class="task-status ${service.status}">${getStatusText(service.status)}</span>
-                    ${service.prestataireId ? `<p style="margin-top: 0.5rem; color: var(--primary); font-weight: 600;">Prestataire: ${service.prestataireName}</p>` : ''}
-                </div>
-            `).join('');
+            container.innerHTML = myServices.map(service => {
+                const categoryInfo = getCategoryInfo(service.category);
+                return `
+                    <div class="task-card" onclick="openChatFromDemandeur(${service.id})">
+                        <div class="category-badge" style="margin-bottom: 0.8rem;">
+                            ${categoryInfo.icon} ${categoryInfo.name}
+                        </div>
+                        <div class="task-description">DESCRIPTION: ${service.description}</div>
+                        <div class="task-detail">LA TACHE COMMENCE: ${service.startLocation}</div>
+                        <div class="task-detail">ADRESSE DE LIVRAISON: ${service.deliveryAddress}</div>
+                        <div class="task-budget">Budget: ${service.budget.toLocaleString()}</div>
+                        <span class="task-status ${service.status}">${getStatusText(service.status)}</span>
+                        ${service.prestataireId ? `<p style="margin-top: 0.5rem; color: var(--primary); font-weight: 600;">Prestataire: ${service.prestataireName}</p>` : ''}
+                    </div>
+                `;
+            }).join('');
         }
 
         // PRESTATAIRE FUNCTIONS
@@ -2352,27 +2879,69 @@
             document.getElementById('chatInterface').classList.add('hidden');
             document.getElementById('profileSection').classList.add('hidden');
             document.getElementById('overviewSection').classList.add('hidden');
+            
+            // Load category filters and tasks
+            loadCategoryFilters();
             loadAvailableTasks();
         }
 
         function loadAvailableTasks() {
-            const availableTasks = services.filter(s => s.status === 'waiting' || (s.status === 'accepted' && s.prestataireId === currentUser.id));
+            let availableTasks = services.filter(s => s.status === 'waiting' || (s.status === 'accepted' && s.prestataireId === currentUser.id));
+            
+            // Apply category filter
+            if (currentCategoryFilter !== 'all') {
+                availableTasks = availableTasks.filter(s => s.category === currentCategoryFilter);
+            }
+
             const container = document.getElementById('tasksContainer');
 
             if (availableTasks.length === 0) {
-                container.innerHTML = '<p style="text-align: center; color: var(--gray); padding: 2rem;">Aucune tâche disponible</p>';
+                container.innerHTML = '<p style="text-align: center; color: var(--gray); padding: 2rem;">Aucune tâche disponible dans cette catégorie</p>';
                 return;
             }
 
-            container.innerHTML = availableTasks.map(task => `
-                <div class="task-card" onclick="acceptTask(${task.id})">
-                    <div class="task-description">DESCRIPTION: ${task.description}</div>
-                    <div class="task-detail">LA TACHE COMMENCE: ${task.startLocation}</div>
-                    <div class="task-detail">ADRESSE DE LIVRAISON: ${task.deliveryAddress}</div>
-                    <div class="task-budget">Budget: ${task.budget.toLocaleString()}</div>
-                    ${task.prestataireId === currentUser.id ? '<span class="task-status accepted">✅ Vous avez accepté</span>' : '<span class="task-status waiting">Cliquer pour accepter</span>'}
-                </div>
-            `).join('');
+            // Get prestataire location if available
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const myLat = position.coords.latitude;
+                    const myLng = position.coords.longitude;
+                    displayTasksWithDistance(availableTasks, myLat, myLng);
+                },
+                () => {
+                    // No geolocation, display without distance
+                    displayTasksWithDistance(availableTasks, null, null);
+                }
+            );
+        }
+
+        function displayTasksWithDistance(tasks, myLat, myLng) {
+            const container = document.getElementById('tasksContainer');
+            
+            container.innerHTML = tasks.map(task => {
+                const categoryInfo = getCategoryInfo(task.category);
+                let distanceHtml = '';
+                
+                if (myLat && myLng && task.startLat && task.startLng) {
+                    const distance = calculateDistance(myLat, myLng, task.startLat, task.startLng);
+                    distanceHtml = `<div class="distance-badge">📍 ${formatDistance(distance)}</div>`;
+                }
+
+                return `
+                    <div class="task-card" onclick="acceptTask(${task.id})">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
+                            <div class="category-badge">
+                                ${categoryInfo.icon} ${categoryInfo.name}
+                            </div>
+                            ${distanceHtml}
+                        </div>
+                        <div class="task-description">DESCRIPTION: ${task.description}</div>
+                        <div class="task-detail">LA TACHE COMMENCE: ${task.startLocation}</div>
+                        <div class="task-detail">ADRESSE DE LIVRAISON: ${task.deliveryAddress}</div>
+                        <div class="task-budget">Budget: ${task.budget.toLocaleString()}</div>
+                        ${task.prestataireId === currentUser.id ? '<span class="task-status accepted">✅ Vous avez accepté</span>' : '<span class="task-status waiting">Cliquer pour accepter</span>'}
+                    </div>
+                `;
+            }).join('');
         }
 
         function acceptTask(taskId) {
@@ -3236,5 +3805,6 @@
             }
         }
     </script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </body>
 </html>
